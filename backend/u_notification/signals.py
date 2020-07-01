@@ -71,14 +71,16 @@ def new_post_listener(sender, instance, created, **kwargs):
 
         for sub in subscriptions_on_user:
             watcher = sub.watcher
-            watcher.new_notification += 1
             notification.to_users.add(watcher)
 
         # Check for subscription on category
-        subscriptions_on_category = SubscriptionForCategory.objects.filter(object_of_observation=instance.author)
+        subscriptions_on_category = SubscriptionForCategory.objects.filter(object_of_observation=instance.category)
 
         for sub in subscriptions_on_category:
             watcher = sub.watcher
             if not watcher == instance.author:
-                watcher.new_notification += 1
                 notification.to_users.add(watcher)
+
+        for user in notification.to_users.all():
+            user.new_notification += 1
+            user.save()

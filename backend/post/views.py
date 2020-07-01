@@ -21,3 +21,4 @@ class TagListView(generics.ListAPIView):
 class CategoryListView(generics.ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+

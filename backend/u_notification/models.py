@@ -11,7 +11,7 @@ class Actions(models.Model):
     by_user = models.ForeignKey(User, on_delete=models.CASCADE)
     action = models.CharField(max_length=500)
     type = models.CharField('Type of instance', max_length=50)
-    _id = models.IntegerField('Instance ID')
+    _id = models.PositiveIntegerField('Instance ID')
 
     def __str__(self):
         return f'{self.by_user.username} - {self.action}'

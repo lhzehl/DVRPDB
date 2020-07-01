@@ -39,7 +39,7 @@ class Profile(models.Model):
     last_name = models.CharField('Last name', blank=True, max_length=50)
     username = models.CharField('Username', unique=True, blank=True, max_length=150)
     dob = models.DateTimeField('Date of birth', blank=True, null=True)
-    new_notification = models.IntegerField('Number of new notifications', null=True, default=0)
+    new_notification = models.PositiveIntegerField('Number of new notifications', null=True, default=0)
 
     def __str__(self):
         return f' Profile {self.username or self.user.email}'
