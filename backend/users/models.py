@@ -21,6 +21,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
 
+    def save(self, *args, **kwargs):
+        self.email = self.email.lower()
+        super(CustomUser, self).save(*args, **kwargs)
+
     def __str__(self):
         return f'{self.profile.username or self.email}'
 
@@ -34,7 +38,7 @@ class Profile(models.Model):
     user profile with additional information, all connection with other models by profile
     """
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    image = models.ImageField('Profile image', blank=True)
+    image = models.ImageField('Profile image', blank=True, upload_to='profile_pics')
     name = models.CharField('Name', blank=True, max_length=50)
     last_name = models.CharField('Last name', blank=True, max_length=50)
     username = models.CharField('Username', unique=True, blank=True, max_length=150)

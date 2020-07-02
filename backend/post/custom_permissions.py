@@ -11,11 +11,3 @@ class IsAuthorOrStaffOrReadOnlyPermission(permissions.BasePermission):
             return True
         return request.user == obj.author or request.user.is_staff
 
-
-class IsStaffPermission(permissions.BasePermission):
-    """
-    permission check is current user staff
-    """
-
-    def has_object_permission(self, request, view, obj):
-        return request.user.is_staff

@@ -16,6 +16,10 @@ class Actions(models.Model):
     def __str__(self):
         return f'{self.by_user.username} - {self.action}'
 
+    class Meta:
+        verbose_name = 'Action'
+        verbose_name_plural = 'Actions'
+
 
 class Notifications(models.Model):
     """
@@ -26,6 +30,10 @@ class Notifications(models.Model):
 
     def __str__(self):
         return f'{self.actions.by_user.username} - {self.actions.action}'
+
+    class Meta:
+        verbose_name = 'Notification'
+        verbose_name_plural = 'Notifications'
 
 
 class SubscriptionForUser(models.Model):
@@ -38,6 +46,10 @@ class SubscriptionForUser(models.Model):
     def __str__(self):
         return f'{self.watcher.username} watch for {self.object_of_observation.username}'
 
+    class Meta:
+        verbose_name = 'subscription for user'
+        verbose_name_plural = 'subscriptions for users'
+
 
 class SubscriptionForPost(models.Model):
     """
@@ -49,10 +61,19 @@ class SubscriptionForPost(models.Model):
     def __str__(self):
         return f'{self.watcher.username} watch for {self.object_of_observation.title}'
 
+    class Meta:
+        verbose_name = 'subscription for post'
+        verbose_name_plural = 'subscriptions for posts'
+
 
 class SubscriptionForCategory(models.Model):
     """
     This is model subscription on category
     """
     watcher = models.OneToOneField(User, on_delete=models.CASCADE, related_name='watch_for_category')
-    object_of_observation = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='observation_for_category')
+    object_of_observation = models.ForeignKey(Category, on_delete=models.CASCADE,
+                                              related_name='observation_for_category')
+
+    class Meta:
+        verbose_name = 'subscription for category'
+        verbose_name_plural = 'subscriptions for categories'

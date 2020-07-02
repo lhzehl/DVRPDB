@@ -9,7 +9,7 @@ from .serializers import PostListSerializer, TagSerializer, CategoryListSerializ
 
 from .custom_filter import PostFilter
 
-from .custom_permissions import IsStaffPermission, IsAuthorOrStaffOrReadOnlyPermission
+from .custom_permissions import IsAuthorOrStaffOrReadOnlyPermission
 
 
 class PostListView(generics.ListAPIView):
@@ -91,4 +91,4 @@ class CategoryCreateView(generics.CreateAPIView):
     ### create category
     """
     serializer_class = CategorySerializer
-    permission_classes = [IsStaffPermission]
+    permission_classes = [permissions.IsAdminUser]
