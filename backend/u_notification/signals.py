@@ -19,7 +19,9 @@ def new_comment_listeners(sender, instance, created, **kwargs):
     """
     if created:
         message = f'comment post {instance.post.title}'
-        action = Actions(by_user=instance.author, action=message, type='comment', _id=instance.id)
+        action = Actions(by_user=instance.author, action=message, type='comment', comment_id=instance.id,
+                         post_id=instance.post.id)
+        print(instance.post.id, instance.id, instance.author)
         action.save()
 
         notification = Notifications(actions=action)
@@ -60,7 +62,7 @@ def new_post_listener(sender, instance, created, **kwargs):
     """
     if created:
         message = f'add new post - {instance.title}'
-        action = Actions(by_user=instance.author, action=message, type='post', _id=instance.id)
+        action = Actions(by_user=instance.author, action=message, type='post', post_id=instance.id)
         action.save()
 
         notification = Notifications(actions=action)

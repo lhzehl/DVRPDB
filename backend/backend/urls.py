@@ -33,5 +33,6 @@ urlpatterns = [
 
     path('api/v1/post/', include('post.urls')),
     path('api/v1/dialog/', include('u_messages.urls')),
-    path('api/v1/users/', include('users.urls'))
+    path('api/v1/users/', include('users.urls')),
+    path('api/v1/actions/', include('u_notification.urls'))
 ]
