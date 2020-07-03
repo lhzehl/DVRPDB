@@ -44,6 +44,9 @@ class Profile(models.Model):
     username = models.CharField('Username', unique=True, blank=True, max_length=150)
     dob = models.DateTimeField('Date of birth', blank=True, null=True)
     new_notification = models.PositiveIntegerField('Number of new notifications', null=True, default=0)
+    # moderator = models.BooleanField(default=False)
+    # admin = models.BooleanField(default=False)
+    # online_at = models.DateTimeField('Last online', blank=True)
 
     def __str__(self):
         return f' Profile {self.username or self.user.email}'
@@ -51,6 +54,10 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         if not self.username:
             self.username = f'{self.user.email.split("@")[0]}-{int(time())}'
+
+        # self.moderator = self.user.is_staff
+        # self.admin = self.user.is_superuser
+        # self.online_at = self.user.last_login
         super().save(*args, **kwargs)
         if not self.image:
             pass
