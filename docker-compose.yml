@@ -1,17 +1,36 @@
 version: "3"
 
 services:
-    db:
-        container_name: dvrpdb_db
-        image: postgres:12
-        volumes:
-            - postgres_data:/var/lib/postgresql/data
-        environment:
-            - POSTGRES_USER=hello_django
-            - POSTGRES_PASSWORD=hello_django
-            - POSTGRES_DB=hello_django_dev
-        ports: 
-            - "5432:5432"
+  db:
+    container_name: dvrpdb_db
+    image: postgres:12
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
+      - POSTGRES_DB=hello_django_dev
+
+
+  backend:
+    container_name: dvrpdb_backend
+    build: ./backend
+
+    volumes:
+      - ./backend/:/usr/src/backend
+      - django-static:/usr/src/backend/static
+      - django-media:/usr/src/backend/media
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    env_file:
+      - ./backend/.env.dev
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
 
 volumes:
-    postgres_data:
+  postgres_data:
+  django-static:
+  django-media:

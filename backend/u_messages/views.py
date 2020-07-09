@@ -36,7 +36,7 @@ class StartMessageView(generics.CreateAPIView):
     Start dialog
     """
     serializer_class = StartMessageSerializer
-    permission_classes = permissions.IsAuthenticated
+    permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
         serializer.save(sender=self.request.user.profile)
