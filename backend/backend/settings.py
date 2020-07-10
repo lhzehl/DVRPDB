@@ -27,6 +27,9 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 # Application definition
 
+
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -34,11 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders', #! for cors from front
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
     'django_filters',
-    'corsheaders',
+    
     'post.apps.PostConfig',
     'users.apps.UsersConfig',
     'u_messages.apps.MessagesConfig',
@@ -46,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  #! for cors from front
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CORS_ORIGIN_ALLOW_ALL = True #! for cors from front , after middleware**
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -191,4 +197,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('MAIL')
 EMAIL_HOST_PASSWORD = os.environ.get('MAIL_PASS')
 
-CORS_ORIGIN_ALLOW_ALL = True
+

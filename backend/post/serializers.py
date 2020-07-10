@@ -63,6 +63,8 @@ class PostListSerializer(serializers.ModelSerializer):
 
 class PostDetailSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True)
+    category = CategoryListSerializer()
+    tags = TagSerializer(many=True)
     comments = CommentsListSerializer(read_only=True, many=True)
 
     class Meta:

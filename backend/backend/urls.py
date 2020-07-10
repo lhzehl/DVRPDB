@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 
 # simple jwt
@@ -36,3 +38,7 @@ urlpatterns = [
     path('api/v1/users/', include('users.urls')),
     path('api/v1/actions/', include('u_notification.urls'))
 ]
+
+# * to share media by django-server
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
