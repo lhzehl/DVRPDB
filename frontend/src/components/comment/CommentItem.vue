@@ -2,7 +2,10 @@
   <div>
     <div class="row mt-2 mb-2">
       <div class="col-4 comment-author">
-        <a href="#">{{ comment.author.username }}</a>
+
+                  <router-link class="mr-5 " :to="routeToAuthor">{{
+            comment.author.username
+          }}</router-link>
         <img
           class="comment-author-image mt-2 mr-2"
           :src="comment.author.image"
@@ -20,6 +23,11 @@ export default {
     comment: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+        routeToAuthor(){
+      return `/users/profile/${this.comment.author.id}`
     },
   },
 };

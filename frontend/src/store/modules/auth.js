@@ -1,5 +1,5 @@
 import axios from "@/plugins/axios";
-// import router from "@/router"; /auth/users/
+import router from "@/router";
 import mutations from "@/store/mutations";
 
 const {
@@ -52,9 +52,11 @@ const authStore = {
       });
       try {
         const response = await axios.post("/auth/token/login", formData);
-        const token = response.data.auth_token.slice(1, -1);
+        const token = response.data.auth_token;
+
         localStorage.setItem("lhzehl-blog-t", token);
         commit(ISAUTH, true);
+        router.push("profile");
       } catch (err) {
         let errText = err.response.data.non_field_errors[0];
         commit(ERRLOGIN, errText);
@@ -71,8 +73,8 @@ const authStore = {
         commit(CREATEDNEWACC, "");
 
         const response = await axios.post("/auth/users/", formData);
+
         commit(CREATEDNEWACC, response.statusText);
-        
       } catch (err) {
         const errTextMail = err.response.data.email;
         const errTextPass = err.response.data.password;

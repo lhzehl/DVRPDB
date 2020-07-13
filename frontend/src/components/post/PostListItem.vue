@@ -3,7 +3,7 @@
     <div class="container mt-2">
       <div class="row">
         <div class="col-4 post-left">
-          <a href="#">{{ post.author.username }}</a
+          <router-link :to="routeToAuthor">{{ post.author.username }}</router-link
           ><a> {{ localedate }}</a>
         </div>
         <div class="col-8"></div>
@@ -54,6 +54,9 @@ export default {
       } else {
         return this.post.descriptions;
       }
+    },
+    routeToAuthor(){
+      return `/users/profile/${this.post.author.id}`
     },
   },
 };

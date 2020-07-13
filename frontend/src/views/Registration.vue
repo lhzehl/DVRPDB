@@ -9,6 +9,7 @@
         class="mb-0"
       >
         <p class="err-reg">{{ errRegMail }}</p>
+        <p class="is-created">{{isCreated}}</p>
         <b-form-group
           label-cols-sm="3"
           label="Email:"
@@ -19,6 +20,7 @@
             v-model="email"
             type="email"
             id="email-input"
+
           ></b-form-input>
         </b-form-group>
         <p class="err-reg">{{ errRegPass }}</p>
@@ -32,10 +34,11 @@
             v-model="password"
             type="password"
             id="password-input"
+
           ></b-form-input>
         </b-form-group>
       </b-form-group>
-      <router-link to="/auth" class="btn btn-submit mr-3">SingIn</router-link>
+      <router-link to="/authorization" class="btn btn-submit mr-3">SingIn</router-link>
       <button class="btn btn-submit" v-on:click="logInFormSubmit">
         Submit
       </button>

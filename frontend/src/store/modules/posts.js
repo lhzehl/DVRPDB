@@ -34,17 +34,15 @@ const postsStore = {
         console.log(err);
       }
     },
-    async fetchPostDetail({commit}, id){
-      try{
-        const response = await axios.get(`/api/v1/post/posts/${id}`)
-        const postDetail = response.data
-        commit(POSTDETAIL, postDetail)
+    async fetchPostDetail({ commit }, id) {
+      try {
+        const response = await axios.get(`/api/v1/post/posts/${id}`);
+        const postDetail = response.data;
+        commit(POSTDETAIL, postDetail);
         // console.log(postDetail, commit)
-
-
-      } catch(err){
-        console.log(err)
-        
+      } catch (err) {
+        console.log(err);
+        localStorage.removeItem("lhzehl-blog-t");
       }
     },
   },

@@ -42,7 +42,7 @@ class Profile(models.Model):
     name = models.CharField('Name', blank=True, max_length=50)
     last_name = models.CharField('Last name', blank=True, max_length=50)
     username = models.CharField('Username', unique=True, blank=True, max_length=150)
-    dob = models.DateTimeField('Date of birth', blank=True, null=True)
+    dob = models.DateField('Date of birth', blank=True, null=True)
     new_notification = models.PositiveIntegerField('Number of new notifications', null=True, default=0)
     # moderator = models.BooleanField(default=False)
     # admin = models.BooleanField(default=False)

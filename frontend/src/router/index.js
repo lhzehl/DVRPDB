@@ -4,6 +4,8 @@ import PostList from "../views/PostList";
 import PostDetail from "../views/PostDetail";
 import Authorization from "../views/Authorization";
 import Registration from "../views/Registration";
+import OwnProfile from "../views/OwnProfile";
+import UserProfile from "../views/UserProfile";
 
 Vue.use(VueRouter);
 
@@ -20,7 +22,7 @@ const routes = [
     props: castRouteParams,
   },
   {
-    path: "/auth",
+    path: "/authorization",
     name: "Authorization",
     component: Authorization,
   },
@@ -28,6 +30,17 @@ const routes = [
     path: "/registration",
     name: "Registration",
     component: Registration,
+  },
+  {
+    path: "/profile",
+    name: "OwnProfile",
+    component: OwnProfile,
+  },
+  {
+    path: "/users/profile/:id",
+    name: "UserProfile",
+    component: UserProfile,
+    props: castRouteParams,
   },
   {
     path: "/about",

@@ -53,7 +53,6 @@ export default {
   methods: {
     ...mapActions("auth", ["fetchLogin"]),
     logInFormSubmit() {
-      console.log(this.email, this.password);
       let data = {
         email: this.email,
         password: this.password,

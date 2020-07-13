@@ -3,7 +3,9 @@
     <div class="container mt-2">
       <div class="row">
         <div class="col-12 top-part">
-          <a class="mr-5 post-author" href="#">{{ post.author.username }}</a>
+          <router-link class="mr-5 post-author" :to="routeToAuthor">{{
+            post.author.username
+          }}</router-link>
           <a class="mr-5" href="#">{{ localedate }}</a>
           <a v-if="isPostCategoryExist" href="#">{{ post.category.title }}</a>
           <img v-if="isPostImageExist" class="post-image" :src="post.image" />
@@ -16,7 +18,7 @@
         </div>
       </div>
       <template v-if="isPostCommentsExist">
-        <CommentsList :comments="post.comments"/>
+        <CommentsList :comments="post.comments" />
       </template>
     </div>
   </div>
@@ -47,6 +49,9 @@ export default {
     },
     isPostCommentsExist() {
       return Boolean(this.post.comments.length);
+    },
+    routeToAuthor() {
+      return `/users/profile/${this.post.author.id}`;
     },
   },
 };
