@@ -3,7 +3,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 
-from .models import StartMessage, ReplyMessage
+from .models import Dialog, Reply
 from .serializers import StartMessageSerializer, ReplyMessageSerializer, DialogDetailSerializer
 
 from rest_framework import permissions
@@ -86,11 +86,11 @@ class RDialogListView(generics.ListAPIView):
             user = self.request.user.profile
         except AttributeError:
             return []
-        return StartMessage.objects.filter(recipient=user)
+        return Dialog.objects.filter(recipient=user)
 
 
 class DialogDetailView(generics.RetrieveAPIView):
     serializer_class = DialogDetailSerializer
-    queryset = StartMessage.objects.all()
+    queryset = Dialog.objects.all()
 
     permission_classes = [permissions.IsAuthenticated, IsSenderOrIsRecipient]

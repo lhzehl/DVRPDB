@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 
-class StartMessage(models.Model):
+class Dialog(models.Model):
     sender = models.ForeignKey(User, verbose_name='Author', related_name='Sender', on_delete=models.CASCADE)
     recipient = models.ForeignKey(User, verbose_name='Listener', related_name='Recipient', on_delete=models.CASCADE)
     message = models.TextField('Message')
@@ -15,9 +15,9 @@ class StartMessage(models.Model):
         return f'{self.sender} - {self.recipient} - id:{self.id}'
 
 
-class ReplyMessage(models.Model):
+class Reply(models.Model):
     sender = models.ForeignKey(User, verbose_name='Answerer', on_delete=models.CASCADE)
-    reply_for = models.ForeignKey(StartMessage, on_delete=models.CASCADE, verbose_name='Dialog')
+    dialog = models.ForeignKey(Dialog, on_delete=models.CASCADE, verbose_name='Dialog', related_name="reply")
     message = models.TextField('Message')
     date_add = models.DateTimeField(auto_now_add=True)
 

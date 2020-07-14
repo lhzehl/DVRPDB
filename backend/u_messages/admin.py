@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import StartMessage, ReplyMessage
+from .models import Dialog, Reply
 # Register your models here.
-admin.site.register(StartMessage)
-admin.site.register(ReplyMessage)
+admin.site.register(Dialog)
+admin.site.register(Reply)
