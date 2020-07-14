@@ -69,6 +69,14 @@ const profileStore = {
         console.log(err);
       }
     },
+    async fetchSubscriptionsForUsers({commit}, id){
+      try {
+        const responce = await axios.post('/api/v1/actions/watchuser/', id)
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
   },
 };
 export default profileStore;
