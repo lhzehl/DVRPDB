@@ -19,3 +19,21 @@ class ReplyMessageSerializer(serializers.ModelSerializer):
         fields = [
             "message", "reply_for"
         ]
+
+
+class DialogItemsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReplyMessage
+        fields = [
+            "sender", "message", 'id'
+        ]
+
+
+class DialogDetailSerializer(serializers.ModelSerializer):
+    replymessage = DialogItemsSerializer(read_only=True, many=True)
+    class Meta:
+        model = StartMessage
+        fields = [
+            "message","sender", 
+            "recipient",'replymessage'
+        ]

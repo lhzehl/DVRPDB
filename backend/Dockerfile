@@ -18,4 +18,5 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # run entrypoint.sh
+RUN chmod +x entrypoint.sh
 ENTRYPOINT ["sh", "-c", "/usr/src/backend/entrypoint.sh"]

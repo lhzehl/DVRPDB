@@ -1,44 +1,45 @@
 <template>
   <div>
     <b-card bg-variant="light" class="auth-form">
-      <b-form-group
+      <!-- <b-form-group
         label-cols-lg="3"
         label="Registration"
         label-size="lg"
         label-class="font-weight-bold pt-0"
-        class="mb-0"
+        class="mx-auto"
+      > -->
+      <p class="reg">Registration</p>
+      <p class="err-reg">{{ errRegMail }}</p>
+      <p class="is-created">{{ isCreated }}</p>
+      <b-form-group
+        label-cols-sm="3"
+        label="Email:"
+        label-align-sm="right"
+        label-for="email-input"
       >
-        <p class="err-reg">{{ errRegMail }}</p>
-        <p class="is-created">{{isCreated}}</p>
-        <b-form-group
-          label-cols-sm="3"
-          label="Email:"
-          label-align-sm="right"
-          label-for="email-input"
-        >
-          <b-form-input
-            v-model="email"
-            type="email"
-            id="email-input"
-
-          ></b-form-input>
-        </b-form-group>
-        <p class="err-reg">{{ errRegPass }}</p>
-        <b-form-group
-          label-cols-sm="3"
-          label="Password:"
-          label-align-sm="right"
-          label-for="password-input"
-        >
-          <b-form-input
-            v-model="password"
-            type="password"
-            id="password-input"
-
-          ></b-form-input>
-        </b-form-group>
+        <b-form-input
+          v-model="email"
+          type="email"
+          id="email-input"
+        ></b-form-input>
       </b-form-group>
-      <router-link to="/authorization" class="btn btn-submit mr-3">SingIn</router-link>
+      <p class="err-reg">{{ errRegPass }}</p>
+      <b-form-group
+        label-cols-sm="3"
+        label="Password:"
+        label-align-sm="right"
+        label-for="password-input"
+      >
+        <b-form-input
+          v-model="password"
+          type="password"
+          id="password-input"
+        ></b-form-input>
+      </b-form-group>
+      <!-- </b-form-group> -->
+      <router-link to="/authorization" class="btn btn-submit mr-3"
+        >SingIn</router-link
+      >
       <button class="btn btn-submit" v-on:click="logInFormSubmit">
         Submit
       </button>
@@ -92,10 +93,15 @@ export default {
   font-weight: bold;
   font-size: large;
 }
-.is-created{
-    color: royalblue;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
-    font-size: x-large;
+.is-created {
+  color: royalblue;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-size: x-large;
+}
+.reg {
+  font-size: large;
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 </style>

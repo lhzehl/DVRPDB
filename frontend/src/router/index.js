@@ -7,6 +7,7 @@ import Registration from "../views/Registration";
 import OwnProfile from "../views/OwnProfile";
 import UserProfile from "../views/UserProfile";
 import CreatePost from "../views/CreatePost";
+import DialogList from "../views/DialogList";
 
 Vue.use(VueRouter);
 
@@ -47,6 +48,11 @@ const routes = [
     path: "/create",
     name: "CreatePost",
     component: CreatePost,
+  },
+  {
+    path: "/dialog",
+    name: "DialogList",
+    component: DialogList,
   },
   {
     path: "/about",

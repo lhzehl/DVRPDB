@@ -54,6 +54,7 @@ const profileStore = {
       Object.keys(data).forEach((el) => {
         formData.append(el, data[el]);
       });
+      // console.log(data)
 
       try {
         const response = await axios.patch(
