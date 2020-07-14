@@ -16,7 +16,10 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . .
-
+RUN ["chmod", "+x", "/usr/src/backend/entrypoint.sh"]
 # run entrypoint.sh
+<<<<<<< HEAD
 RUN chmod +x entrypoint.sh
+=======
+>>>>>>> a507a0dbb05935a7840b1bab2ffe15fbbb2b09c3
 ENTRYPOINT ["sh", "-c", "/usr/src/backend/entrypoint.sh"]
