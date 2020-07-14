@@ -89,7 +89,7 @@ class PostCreateSerializer(serializers.ModelSerializer):
 class CommentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
-        fields = '__all__'
+        fields = ['post', 'text']
 
 
 class CommentUpdateDeleteSerializer(serializers.ModelSerializer):

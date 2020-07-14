@@ -6,15 +6,15 @@
     <template v-if="!edited">
       <div class="row">
         <div class="col-6">
-          <p>Name:</p>
-          <p>Username:</p>
-          <p>DOB:</p>
-          <p>Photo:</p>
+          <p class="mt-2">Name:</p>
+          <p class="mt-2">Username:</p>
+          <p class="mt-2">DOB:</p>
+          <p class="mt-2">Photo:</p>
         </div>
         <div class="col-6">
-          <p>{{ profile.name || "null" }}</p>
-          <p>{{ profile.username || "" }}</p>
-          <p>{{ localeDate }}</p>
+          <p class="mt-2">{{ profile.name || "null" }}</p>
+          <p class="mt-2">{{ profile.username || "" }}</p>
+          <p class="mt-2">{{ localeDate }}</p>
           <img :src="profile.image" />
         </div>
       </div>
@@ -22,26 +22,27 @@
     <template v-if="edited">
       <div class="row">
         <div class="col-6">
-          <p>Name:</p>
-          <p>Username:</p>
-          <p>BOD:</p>
-          <p>Photo:</p>
+          <p class="mt-2">Name:</p>
+          <p class="mt-2">Username:</p>
+          <p class="mt-2">BOD:</p>
+          <p class="mt-2">Photo:</p>
         </div>
         <div class="col-6">
-          <input type="text" v-model="form.name" />
-          <input type="text" v-model="form.username" />
-          <b-form-datepicker
+          <input class="mt-2" type="text" v-model="form.name" /> <br>
+          <input class="mt-2" type="text" v-model="form.username" /> <br>
+          <b-form-datepicker class="mt-2"
             id="example-datepicker"
             v-model="form.dob"
-          ></b-form-datepicker>
-          <img class="profile-image" :src="imagePreview" />
+          ></b-form-datepicker> <br>
+          <img class="profile-image mt-2" :src="imagePreview" /> <br>
           <input
+          class="mt-2"
             type="file"
             ref="file"
             id="photo"
             accept="image/*"
             v-on:change="handleFileUpload()"
-          />
+          /> <br>
         </div>
       </div>
       <button class="btn btn-primary" @click="onSubmit">Save</button>

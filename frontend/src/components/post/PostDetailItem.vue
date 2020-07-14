@@ -17,6 +17,7 @@
           <p>{{ post.descriptions }}</p>
         </div>
       </div>
+      <CommentCreate :id="post.id" />
       <template v-if="isPostCommentsExist">
         <CommentsList :comments="post.comments" />
       </template>
@@ -26,6 +27,7 @@
 
 <script>
 import CommentsList from "@/components/comment/CommentsList";
+import CommentCreate from "@/components/comment/CommentCreate";
 export default {
   name: "PostDetailItem",
   props: {
@@ -36,6 +38,7 @@ export default {
   },
   components: {
     CommentsList,
+    CommentCreate,
   },
   computed: {
     localedate() {

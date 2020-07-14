@@ -10,7 +10,7 @@
       </div>
       <div class="row">
         <div class="col-4 post-left">
-          <img :src="post.image" />
+          <img class="mx-auto post-image" :src="post.image" />
         </div>
         <div class="col-8 post-short">
           <h3>
@@ -69,5 +69,8 @@ export default {
 }
 .post-short {
   border: 2px solid steelblue;
+}
+.post-image{
+  max-width: 100%;
 }
 </style>

@@ -86,6 +86,12 @@ const authStore = {
         }
       }
     },
+    // redirectToAuth(){
+    //         router.push("authorization");
+    // },
+    changeStoreToNonAuth({commit}){
+        commit(ISAUTH, false)
+    }
   },
 };
 export default authStore;
