@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import ActionsListView, UsersNotificationView,\
-    AddSubscriptionForUser, AddSubscriptionForCategory, AddSubscriptionForPost
+    AddSubscriptionForUser, AddSubscriptionForCategory, AddSubscriptionForPost, UsersSubList
 
 
 urlpatterns = [
@@ -9,5 +9,6 @@ urlpatterns = [
     path('watchuser/', AddSubscriptionForUser.as_view()),
     path('watchcategory/', AddSubscriptionForCategory.as_view()),
     path('watchpost/', AddSubscriptionForPost.as_view()),
+    path('watchuserslist/', UsersSubList.as_view())
 
 ]

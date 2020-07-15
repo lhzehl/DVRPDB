@@ -10,13 +10,16 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update && apt-get install -y netcat
 
 # install dependencies
+
 RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy project
 COPY . .
+
+# RUN dos2unix /usr/src/backend/entrypoint.sh
 RUN chmod +x /usr/src/backend/entrypoint.sh
 # RUN ["chmod", "+x", "/usr/src/backend/entrypoint.sh"]
 # run entrypoint.sh
-ENTRYPOINT ["sh", "-c", "/usr/src/backend/entrypoint.sh"]
+ENTRYPOINT ["sh", "-c",  "/usr/src/backend/entrypoint.sh"]

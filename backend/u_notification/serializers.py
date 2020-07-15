@@ -46,3 +46,9 @@ class SubscriptionForCategorySerializers(serializers.ModelSerializer):
     class Meta:
         model = SubscriptionForCategory
         fields = ['object_of_observation']
+
+
+class SubToUsersList(serializers.ModelSerializer):
+    class Meta:
+        model = SubscriptionForUser
+        fields = '__all__'

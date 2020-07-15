@@ -17,7 +17,8 @@ class StartMessageSerializer(serializers.ModelSerializer):
         model = Dialog
         fields = [
             "message",
-            "is_read",
+            'id',
+            # "is_read",
             "recipient",
         ]
 
@@ -26,7 +27,7 @@ class ReplyMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reply
         fields = [
-            "message", "reply_for"
+            "message", "dialog"
         ]
 
 
@@ -49,5 +50,18 @@ class DialogDetailSerializer(serializers.ModelSerializer):
         model = Dialog
         fields = [
             "message", "sender",
-            "recipient", "reply"
+            "recipient", "reply", 'id'
+        ]
+
+class DialogListSerializer(serializers.ModelSerializer):
+    sender = MessageAuthorSerializer(read_only=True)
+    recipient = MessageAuthorSerializer(read_only=True)
+    class Meta:
+        model = Dialog
+        fields = [
+            'id',
+            'sender',
+            "message",
+            "is_read",
+            "recipient",
         ]

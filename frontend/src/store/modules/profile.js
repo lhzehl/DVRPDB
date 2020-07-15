@@ -72,6 +72,7 @@ const profileStore = {
     async fetchSubscriptionsForUsers({commit}, id){
       try {
         const responce = await axios.post('/api/v1/actions/watchuser/', id)
+        console.log(responce, commit)
       } catch (error) {
         console.log(error)
       }

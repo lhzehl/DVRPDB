@@ -19,6 +19,7 @@
               <em>{{ ownProfile.username }}</em>
             </template>
             <b-dropdown-item to="/profile">Profile</b-dropdown-item>
+            <b-dropdown-item to="/dialog">Messages</b-dropdown-item>
             <b-dropdown-item @click="logOut">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown right v-else>

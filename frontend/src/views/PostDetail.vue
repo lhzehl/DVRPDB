@@ -24,10 +24,7 @@ export default {
       depp: true,
     },
   },
-  //   data: () => ({}),
-  // mounted() {
-  //   this.fetchPostDetail(this.id);
-  // },
+
   methods: {
     ...mapActions("posts", ["fetchPostDetail"]),
     onPostParamsChange({ id = this.id } = {}) {

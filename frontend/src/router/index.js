@@ -8,6 +8,8 @@ import OwnProfile from "../views/OwnProfile";
 import UserProfile from "../views/UserProfile";
 import CreatePost from "../views/CreatePost";
 import DialogList from "../views/DialogList";
+import DialogDetail from "../views/DialogDetail";
+
 
 Vue.use(VueRouter);
 
@@ -53,6 +55,12 @@ const routes = [
     path: "/dialog",
     name: "DialogList",
     component: DialogList,
+  },
+  {
+    path: "/dialog/:id",
+    name: "DialogDetail",
+    component: DialogDetail,
+    props: castRouteParams,
   },
   {
     path: "/about",

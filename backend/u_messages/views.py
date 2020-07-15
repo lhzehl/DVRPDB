@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .models import Dialog, Reply
-from .serializers import StartMessageSerializer, ReplyMessageSerializer, DialogDetailSerializer
+from .serializers import StartMessageSerializer, ReplyMessageSerializer, DialogDetailSerializer, DialogListSerializer
 
 from rest_framework import permissions
 
@@ -21,9 +21,9 @@ class IsSenderOrIsRecipient(permissions.BasePermission):
 
             is_recipient = request.user.profile == obj.recipient
         except AttributeError:
-            is_sender = request.user.profile == obj.reply_for.sender
+            is_sender = request.user.profile == obj.dialog.sender
 
-            is_recipient = request.user.profile == obj.reply_for.recipient
+            is_recipient = request.user.profile == obj.dialog.recipient
         # except
 
         has_permission = is_sender or is_recipient
@@ -58,7 +58,7 @@ class SDialogListView(generics.ListAPIView):
     start by user dialog
     """
 
-    serializer_class = StartMessageSerializer
+    serializer_class = DialogListSerializer
     permission_classes = [permissions.IsAuthenticated, IsSenderOrIsRecipient]
 
     def get_queryset(self):
@@ -70,7 +70,7 @@ class SDialogListView(generics.ListAPIView):
             user = self.request.user.profile
         except AttributeError:
             return []
-        return StartMessage.objects.filter(sender=user)
+        return Dialog.objects.filter(sender=user)
 
 
 class RDialogListView(generics.ListAPIView):
@@ -78,7 +78,7 @@ class RDialogListView(generics.ListAPIView):
     user recipient dialog list
     """
 
-    serializer_class = StartMessageSerializer
+    serializer_class = DialogListSerializer
     permission_classes = [permissions.IsAuthenticated, IsSenderOrIsRecipient]
 
     def get_queryset(self):

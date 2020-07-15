@@ -1,9 +1,13 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, permissions
 
-from .models import Actions, Notifications
+from .models import Actions, Notifications, SubscriptionForUser
 
 from .serializers import ActionsListSerializers, NotificationsSerializers, \
-    SubscriptionForUserSerializers, SubscriptionForCategorySerializers, SubscriptionForPostSerializers
+    SubscriptionForUserSerializers, SubscriptionForCategorySerializers, SubscriptionForPostSerializers, \
+    SubToUsersList
+
+from .custom_filter import SubscriptionForUserFilter
 
 
 class ActionsListView(generics.ListAPIView):
@@ -41,3 +45,10 @@ class AddSubscriptionForPost(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(watcher=self.request.user.profile)
+
+
+class UsersSubList(generics.ListAPIView):
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = SubscriptionForUserFilter
+    serializer_class = SubToUsersList
+    queryset = SubscriptionForUser.objects.all()

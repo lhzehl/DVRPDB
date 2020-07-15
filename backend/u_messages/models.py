@@ -22,4 +22,4 @@ class Reply(models.Model):
     date_add = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.sender}  - message_id:{self.id} - dialog_id:{self.reply_for.id}'
+        return f'{self.sender}  - message_id:{self.id} - dialog_id:{self.dialog.id}'
