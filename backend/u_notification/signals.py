@@ -119,11 +119,13 @@ def update_new_notification_listeners(sender, instance, **kwargs):
         # 'by_user': str(instance.actions.by_user)
 
     }
+    
     channel_layer = channels.layers.get_channel_layer()
-    async_to_sync(channel_layer.group_send)(
-        group_name,
-        {
-            'type': 'send_message',
-            'text': message
-        }
-    )
+    if channel_layer.scope["user"] in instance.to_users:
+        async_to_sync(channel_layer.group_send)(
+            group_name,
+            {
+                'type': 'send_message',
+                'text': message
+            }
+        )

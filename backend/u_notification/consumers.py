@@ -1,10 +1,14 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
+from channels.auth import login
 import json
 
 
 class NotificationUserConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
+        await login(self.scope, user)
+
+        # self.user = self.scope["user"]
         self.group_name = 'notifications'
 
         await self.channel_layer.group_add(
@@ -14,6 +18,7 @@ class NotificationUserConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
+        await logout(scope)
         await self.channel_layer.group_discard(
             self.group_name,
             self.channel_name
