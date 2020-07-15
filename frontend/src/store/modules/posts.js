@@ -47,7 +47,7 @@ const postsStore = {
         //   console.log(context);
         const response = await axios.get("/api/v1/post/posts/");
         //   console.log(response.data);
-        const posts = response.data;
+        const posts = response.data.results;
         commit(POSTS, posts);
       } catch (err) {
         console.log(err);

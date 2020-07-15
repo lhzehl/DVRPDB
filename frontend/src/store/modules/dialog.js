@@ -46,8 +46,8 @@ const dialogStore = {
         const responceI = await axios.get("/api/v1/dialog/rlist/");
         const responceO = await axios.get("/api/v1/dialog/slist/");
 
-        const dialogInList = responceI.data;
-        const dialogOutList = responceO.data;
+        const dialogInList = responceI.data.results;
+        const dialogOutList = responceO.data.results;
 
         commit(DIALOGSI, dialogInList);
         commit(DIALOGSO, dialogOutList);
