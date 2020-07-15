@@ -6,6 +6,11 @@ from post.models import Post, Comments
 
 from .models import Actions, Notifications, SubscriptionForUser, SubscriptionForPost, SubscriptionForCategory
 
+import channels
+from asgiref.sync import async_to_sync
+  
+import json
+
 
 @receiver(post_save, sender=Comments)
 def new_comment_listeners(sender, instance, created, **kwargs):
@@ -86,3 +91,39 @@ def new_post_listener(sender, instance, created, **kwargs):
         for user in notification.to_users.all():
             user.new_notification += 1
             user.save()
+
+
+def send_message(event):
+    """
+    Call back function to send message to the browser
+    :param event:
+    :return:
+    """
+    message = event['text']
+    channel_layer = channels.layers.get_channel_layer()
+    # send message to WebSocket
+    async_to_sync(channel_layer.send)(text_data=json.dumps(
+        message
+    ))
+
+
+
+@receiver(post_save, sender=Notifications)
+def update_new_notification_listeners(sender, instance, **kwargs):
+    """
+    Send signal when bd has new records with User notifivation
+    """
+    group_name = 'notifications'
+    message = {
+        'action': str(instance.actions.action),
+        # 'by_user': str(instance.actions.by_user)
+
+    }
+    channel_layer = channels.layers.get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        group_name,
+        {
+            'type': 'send_message',
+            'text': message
+        }
+    )

@@ -10,11 +10,11 @@ then
     echo "PostgreSQL started"
 fi
 
-python manage.py runserver 0.0.0.0:8000
+# python manage.py runserver 0.0.0.0:8000
 # python manage.py makemigrations
 # python manage.py migrate
 # # python manage.py collectstatic
 
-# daphne -b 0.0.0.0 -p 8000 task3.asgi:application
+daphne -b 0.0.0.0 -p 8000 backend.asgi:application
 
 exec "$@"
