@@ -3,17 +3,23 @@ import mutations from "@/store/mutations";
 import router from "../../router";
 // import router from "@/router";
 
-const { POSTS, POSTDETAIL, ISAUTH } = mutations;
+const { POSTS, POSTSNUM, POSTDETAIL, ISAUTH } = mutations;
 
 const postsStore = {
   namespaced: true,
   state: {
     posts: {},
     postDetail: {},
+    countPost: "",
+    currentPage: 1,
+    perPage: 10,
   },
   getters: {
     postList: ({ posts }) => posts,
     postDetail: ({ postDetail }) => postDetail,
+    countPost: ({ countPost }) => countPost,
+    currentPage: ({ currentPage }) => currentPage,
+    perPage: ({ perPage }) => perPage,
   },
   mutations: {
     [POSTS](state, value) {
@@ -24,6 +30,9 @@ const postsStore = {
     },
     [ISAUTH](state, value) {
       state.isLogin = value;
+    },
+    [POSTSNUM](state, value) {
+      state.countPost = value;
     },
   },
   actions: {
@@ -45,10 +54,14 @@ const postsStore = {
     async fetchPosts({ commit }, page) {
       try {
         //   console.log(context);
-        const response = await axios.get(`/api/v1/post/posts/?limit=10&offset=${page-1}0`);
+        const response = await axios.get(
+          `/api/v1/post/posts/?limit=10&offset=${page - 1}0`
+        );
         //   console.log(response.data);
         const posts = response.data.results;
+        const countPost = response.data.count;
         commit(POSTS, posts);
+        commit(POSTSNUM, countPost);
       } catch (err) {
         console.log(err);
       }
