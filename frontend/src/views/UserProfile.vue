@@ -2,9 +2,8 @@
   <div>
     <template v-if="userProfile.username">
       <UsersProfile :profile="userProfile" />
-      
     </template>
-    <template v-if="paramsPosts" >
+    <template v-if="paramsPosts.length">
       <PostListFiltered :posts="paramsPosts" />
     </template>
   </div>
@@ -19,27 +18,27 @@ export default {
   name: "UserProfile",
   components: {
     UsersProfile,
-    PostListFiltered,
+    PostListFiltered
   },
   props: {
     id: {
       type: Number,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
       postAuthor: {
-        author: "",
-      },
+        author: ""
+      }
     };
   },
   watch: {
     "$route.params": {
       handler: "onProfileParamsChange",
       immediate: true,
-      depp: true,
-    },
+      depp: true
+    }
   },
   computed: {
     ...mapGetters("profile", ["userProfile"]),
@@ -47,18 +46,20 @@ export default {
       "paramsPosts",
       "paramsCountPost",
       "paramsCurrentPage",
-      "perPage",
-    ]),
+      "perPage"
+    ])
   },
   methods: {
     ...mapActions("profile", ["fetchUserProfile"]),
     ...mapActions("posts", ["fetchPostsByParams"]),
     onProfileParamsChange({ id = this.id } = {}) {
       this.fetchUserProfile(Number(id));
+      // console.log(this.id, this.userProfile.username);
+      // console.log(id)
       // this.postAuthor.author = this.userProfile.username;
-      this.fetchPostsByParams({ author: this.userProfile.username });
-    },
-  },
+      this.fetchPostsByParams({ author: id});
+    }
+  }
 };
 </script>
 

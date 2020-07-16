@@ -14,7 +14,7 @@ class PostFilter(filter.FilterSet):
     )
 
     author = filter.ModelChoiceFilter(
-        queryset=Author.objects.all(), field_name='author', to_field_name='username'
+        queryset=Author.objects.all(), field_name='author', to_field_name='id'
     )
 
     class Meta:

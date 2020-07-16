@@ -14,12 +14,12 @@ const {
 const postsStore = {
   namespaced: true,
   state: {
-    posts: {},
+    posts: [],
     postDetail: {},
     countPost: "",
     currentPage: 1,
     perPage: 10,
-    paramsPosts: {},
+    paramsPosts: [],
     paramsCountPost: "",
     paramsCurrentPage: 1,
   },
