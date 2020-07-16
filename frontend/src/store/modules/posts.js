@@ -42,12 +42,12 @@ const postsStore = {
         // commit(ISAUTH, false)
       }
     },
-    async fetchPosts({ commit }) {
+    async fetchPosts({ commit }, page) {
       try {
         //   console.log(context);
-        const response = await axios.get("/api/v1/post/posts/");
+        const response = await axios.get(`/api/v1/post/posts/?limit=10&offset=${page-1}0`);
         //   console.log(response.data);
-        const posts = response.data;
+        const posts = response.data.results;
         commit(POSTS, posts);
       } catch (err) {
         console.log(err);

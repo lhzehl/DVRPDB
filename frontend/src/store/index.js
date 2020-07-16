@@ -4,6 +4,7 @@ import posts from "./modules/posts";
 import auth from "./modules/auth";
 import profile from "./modules/profile";
 import dialog from "./modules/dialog";
+import notifications from "./modules/notifications";
 
 Vue.use(Vuex);
 
@@ -16,5 +17,6 @@ export default new Vuex.Store({
     auth,
     profile,
     dialog,
+    notifications,
   },
 });

@@ -25,7 +25,8 @@ export default {
     },
   },
   mounted() {
-    this.fetchPosts();
+    this.fetchPosts(1);
+    // page = 1 =>0
   },
   methods: {
     ...mapActions("posts", ["fetchPosts"]),
