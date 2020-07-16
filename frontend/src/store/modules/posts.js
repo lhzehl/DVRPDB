@@ -1,7 +1,7 @@
 import axios from "@/plugins/axios";
 import mutations from "@/store/mutations";
 import router from "../../router";
-// import router from "@/router";
+
 
 const { POSTS, POSTSNUM, POSTDETAIL, ISAUTH } = mutations;
 
@@ -53,11 +53,11 @@ const postsStore = {
     },
     async fetchPosts({ commit }, page) {
       try {
-        //   console.log(context);
+
         const response = await axios.get(
           `/api/v1/post/posts/?limit=10&offset=${page - 1}0`
         );
-        //   console.log(response.data);
+
         const posts = response.data.results;
         const countPost = response.data.count;
         commit(POSTS, posts);
@@ -71,7 +71,7 @@ const postsStore = {
         const response = await axios.get(`/api/v1/post/posts/${id}`);
         const postDetail = response.data;
         commit(POSTDETAIL, postDetail);
-        // console.log(postDetail, commit)
+
       } catch (err) {
         console.log(err);
         localStorage.removeItem("lhzehl-blog-t");
@@ -106,17 +106,17 @@ const postsStore = {
           "/api/v1/post/newcomment/",
           formData
         );
-        // console.log(response, commit);
+
         const post_id = postResponse.data.post;
         const getResponse = await axios.get(`/api/v1/post/posts/${post_id}`);
         const postDetail = getResponse.data;
         commit(POSTDETAIL, postDetail);
 
-        // const post_id
       } catch (error) {
         console.log(error);
       }
     },
+    // async fetchUpdateComment({}){}
   },
 };
 export default postsStore;

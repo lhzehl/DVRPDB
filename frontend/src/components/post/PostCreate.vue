@@ -103,7 +103,7 @@ export default {
           return Boolean(val);
         };
         const formFiltered = Object.filter(this.form, filterFunc);
-        // console.log(formFiltered);
+
         this.fetchNewPost(formFiltered);
       }
     },

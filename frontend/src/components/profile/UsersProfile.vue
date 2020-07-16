@@ -77,11 +77,11 @@ export default {
           recipient: this.profile.id,
         };
         this.startDialog = false;
-        // console.log(this.isOwn, data)
+
         this.fetchStartDialog(data);
       }
 
-      // console.log(data);
+
     },
     Subscribe() {
       this.fetchSubscribeForUser(this.profile.id);
@@ -109,9 +109,7 @@ export default {
   border: solid 3px rgba(158, 70, 180, 0.788);
   max-width: 100%;
   background: rgba(222, 184, 135, 0.555);
-  /* bottom: 0px; */
-  /* right: 185px; */
-  /* position: absolute; */
+
   border-radius: 5px;
 }
 .mess:hover {
