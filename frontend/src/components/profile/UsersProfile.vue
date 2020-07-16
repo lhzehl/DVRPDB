@@ -6,12 +6,13 @@
         <p class="mt-2 p-left">Username:</p>
         <p class="mt-2 p-left">DOB:</p>
         <p class="mt-2 p-left">Photo:</p>
-        <button class="mess mx-auto mt-2" @click="Subscribe">
-          Subscribe
-        </button>
+
         <div v-if="isLogin && !isOwn">
           <button class="mess mx-auto mt-2" @click="startDialog = true">
             Send Message
+          </button>
+          <button class="mess mx-auto mt-2" @click="Subscribe">
+            Subscribe
           </button>
         </div>
       </div>
@@ -80,8 +81,6 @@ export default {
 
         this.fetchStartDialog(data);
       }
-
-
     },
     Subscribe() {
       this.fetchSubscribeForUser(this.profile.id);

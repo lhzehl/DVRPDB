@@ -2,8 +2,14 @@ import axios from "@/plugins/axios";
 import mutations from "@/store/mutations";
 import router from "../../router";
 
-
-const { POSTS, POSTSNUM, POSTDETAIL, ISAUTH } = mutations;
+const {
+  POSTS,
+  POSTSNUM,
+  POSTDETAIL,
+  ISAUTH,
+  PARAMSPOSTS,
+  PARAMSPOSTSNUM,
+} = mutations;
 
 const postsStore = {
   namespaced: true,
@@ -13,6 +19,9 @@ const postsStore = {
     countPost: "",
     currentPage: 1,
     perPage: 10,
+    paramsPosts: {},
+    paramsCountPost: "",
+    paramsCurrentPage: 1,
   },
   getters: {
     postList: ({ posts }) => posts,
@@ -20,6 +29,9 @@ const postsStore = {
     countPost: ({ countPost }) => countPost,
     currentPage: ({ currentPage }) => currentPage,
     perPage: ({ perPage }) => perPage,
+    paramsPosts: ({ paramsPosts }) => paramsPosts,
+    paramsCountPost: ({ usersCountPost }) => usersCountPost,
+    paramsCurrentPage: ({ paramsCurrentPage }) => paramsCurrentPage,
   },
   mutations: {
     [POSTS](state, value) {
@@ -33,6 +45,12 @@ const postsStore = {
     },
     [POSTSNUM](state, value) {
       state.countPost = value;
+    },
+    [PARAMSPOSTS](state, value) {
+      state.userPosts = value;
+    },
+    [PARAMSPOSTSNUM](state, value) {
+      state.userCountPost = value;
     },
   },
   actions: {
@@ -53,7 +71,6 @@ const postsStore = {
     },
     async fetchPosts({ commit }, page) {
       try {
-
         const response = await axios.get(
           `/api/v1/post/posts/?limit=10&offset=${page - 1}0`
         );
@@ -66,12 +83,45 @@ const postsStore = {
         console.log(err);
       }
     },
+    async fetchPostsByParams({ commit }, params) {
+      // console.log(params);
+      // console.log(commit)
+      let author = "";
+      let category = "";
+      let page = "";
+      let tags = "";
+      if (params.author) {
+        author = `${params.author}`;
+      }
+      if (params.category) {
+        category = `${params.category}`;
+      }
+      if (params.tags) {
+        params.tags.forEach((element) => {
+          tags += `tags=${element}&`;
+        });
+      }
+      if (params.page) {
+        page = `${params.page - 1}0`;
+      }
+      try {
+        const response = await axios.get(
+          `/api/v1/post/posts/?${tags}category=${category}&author=${author}&limit=10&offset=${page}`
+        );
+        const posts = response.data.results;
+        const countPost = response.data.count;
+        console.log(posts);
+        commit(PARAMSPOSTS, posts);
+        commit(PARAMSPOSTSNUM, countPost);
+      } catch (error) {
+        console.log(error, commit);
+      }
+    },
     async fetchPostDetail({ commit }, id) {
       try {
         const response = await axios.get(`/api/v1/post/posts/${id}`);
         const postDetail = response.data;
         commit(POSTDETAIL, postDetail);
-
       } catch (err) {
         console.log(err);
         localStorage.removeItem("lhzehl-blog-t");
@@ -111,7 +161,6 @@ const postsStore = {
         const getResponse = await axios.get(`/api/v1/post/posts/${post_id}`);
         const postDetail = getResponse.data;
         commit(POSTDETAIL, postDetail);
-
       } catch (error) {
         console.log(error);
       }
