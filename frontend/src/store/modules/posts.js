@@ -77,6 +77,24 @@ const postsStore = {
         localStorage.removeItem("lhzehl-blog-t");
       }
     },
+    async fetchUpdatePost({ commit }, data) {
+      try {
+        const formData = new FormData();
+        Object.keys(data).forEach((el) => {
+          formData.append(el, data[el]);
+        });
+        const responsePath = await axios.patch(
+          `/api/v1/post/posts/${data.id}/`,
+          formData
+        );
+        const post_id = responsePath.data.id;
+        const responseGet = await axios.get(`/api/v1/post/posts/${post_id}`);
+        const postDetail = responseGet.data;
+        commit(POSTDETAIL, postDetail);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async fetchNewComment({ commit }, data) {
       const formData = new FormData();
 
