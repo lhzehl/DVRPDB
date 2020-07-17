@@ -1,8 +1,5 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <p class="form-error mx-auto">{{ errors[0] }}</p>
-    </div>
+  <div>
     <div class="row mx-auto">
       <div class="col-6">
         <p class="mt-2">Title:</p>
@@ -36,8 +33,10 @@
         />
       </div>
       <div class="mx-auto">
-        <button class="btn btn-primary" @click="onSubmit">Post</button>
-        <router-link class="btn" to="/">Cancel</router-link>
+        <button class="btn btn-warning" @click="onSubmit">Update</button>
+        <button @click="cancel" class="btn btn-primary">
+          Cancel
+        </button>
       </div>
     </div>
   </div>
@@ -46,19 +45,31 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  name: "PostCreate",
-  data: () => ({
-    form: {
-      
-      title: "",
-      descriptions: "",
-      image: null,
+  name: "PostUpdate",
+  props: {
+    post: {
+      type: Object,
+      required: true,
     },
-    errors: [],
-    imagePreview: "",
-  }),
+  },
+  data() {
+    return {
+      form: {
+        title: this.post.title,
+        descriptions: this.post.descriptions,
+        image: null,
+        id: this.post.id,
+      },
+      imagePreview: this.post.image,
+    };
+  },
+  computed: {
+    routeToPost() {
+      return `/post/${this.post.id}`;
+    },
+  },
   methods: {
-    ...mapActions("posts", ["fetchNewPost"]),
+    ...mapActions("posts", ["fetchUpdatePost"]),
     handleFileUpload() {
       this.form.image = this.$refs.file.files[0];
       const reader = new FileReader();
@@ -75,46 +86,33 @@ export default {
         }
       }
     },
-    checkForm() {
-      this.errors = [];
-      if (this.form.title && this.form.descriptions) {
-        return true;
-      } else {
-        if (!this.form.title) {
-          this.errors.push("title is requered");
-        }
-        if (!this.form.descriptions) {
-          this.errors.push("description is required");
-        }
-        console.log(this.errors);
-        return false;
-      }
-    },
-    onSubmit() {
-      if (this.checkForm()) {
-        Object.filter = function(obj, filtercheck) {
-          let result = {};
-          Object.keys(obj).forEach((key) => {
-            if (filtercheck(obj[key])) result[key] = obj[key];
-          });
-          return result;
-        };
-        const filterFunc = function(val) {
-          return Boolean(val);
-        };
-        const formFiltered = Object.filter(this.form, filterFunc);
+    onSubmit(e) {
+      e.preventDefault();
+      Object.filter = function(obj, filtercheck) {
+        let result = {};
+        Object.keys(obj).forEach((key) => {
+          if (filtercheck(obj[key])) result[key] = obj[key];
+        });
+        return result;
+      };
+      const filterFunc = function(val) {
+        return Boolean(val);
+      };
+      const formFiltered = Object.filter(this.form, filterFunc);
 
-        this.fetchNewPost(formFiltered);
-      }
+      this.fetchUpdatePost(formFiltered);
+      this.$emit("cancel");
+    },
+    cancel() {
+      this.$emit("cancel");
     },
   },
 };
 </script>
 
 <style scoped>
-.form-error {
-  font-size: x-large;
-  font-weight: bold;
-  color: tomato;
+.post-image {
+  max-height: 400px;
+  max-width: 400px;
 }
 </style>

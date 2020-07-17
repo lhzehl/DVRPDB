@@ -1,13 +1,14 @@
 <template>
   <div>
-    <b-card bg-variant="light" class="auth-form">
-      <b-form-group
+    <b-card bg-variant="light" class="auth-form mx-auto">
+      <!-- <b-form-group
         label-cols-lg="3"
         label="Log In"
         label-size="lg"
         label-class="font-weight-bold pt-0"
         class="mb-0"
-      >
+      > -->
+      <p class="login">Log In</p>
       <p class="err-auth">{{errLogin}}</p>
         <b-form-group
           label-cols-sm="3"
@@ -34,7 +35,7 @@
             id="password-input"
           ></b-form-input>
         </b-form-group>
-      </b-form-group>
+      <!-- </b-form-group> -->
       <router-link to="/registration" class="btn btn-submit mr-3"
         >Register</router-link
       >
@@ -68,11 +69,14 @@ export default {
 
 <style scoped>
 .auth-form {
-  max-width: 30rem;
+  min-width: 50%;
 
   margin-top: 5rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
+}
+.login {
+  font-size: large;
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .btn-submit {
   border: solid rgba(70, 131, 180, 0.322);

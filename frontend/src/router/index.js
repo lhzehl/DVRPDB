@@ -9,7 +9,7 @@ import UserProfile from "../views/UserProfile";
 import CreatePost from "../views/CreatePost";
 import DialogList from "../views/DialogList";
 import DialogDetail from "../views/DialogDetail";
-
+import Notifications from "../views/Notifications";
 
 Vue.use(VueRouter);
 
@@ -61,6 +61,11 @@ const routes = [
     name: "DialogDetail",
     component: DialogDetail,
     props: castRouteParams,
+  },
+  {
+    path: "/notifications",
+    name: "Notifications",
+    component: Notifications,
   },
   {
     path: "/about",

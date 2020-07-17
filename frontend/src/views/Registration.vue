@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card bg-variant="light" class="auth-form">
+    <b-card bg-variant="light" class="auth-form mx-auto">
       <!-- <b-form-group
         label-cols-lg="3"
         label="Registration"
@@ -73,11 +73,11 @@ export default {
 
 <style scoped>
 .auth-form {
-  max-width: 30rem;
+  min-width: 50%;
 
   margin-top: 5rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  /* margin-left: 10rem; */
+  /* margin-right: 10rem; */
 }
 .btn-submit {
   border: solid rgba(70, 131, 180, 0.322);

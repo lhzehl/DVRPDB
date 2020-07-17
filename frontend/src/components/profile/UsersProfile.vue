@@ -6,12 +6,15 @@
         <p class="mt-2 p-left">Username:</p>
         <p class="mt-2 p-left">DOB:</p>
         <p class="mt-2 p-left">Photo:</p>
-        <button v-if="isLogin&&!isOwn"
-          class="mess mx-auto"
-          @click="startDialog = true"
-        >
-          Send Message
-        </button>
+
+        <div v-if="isLogin && !isOwn">
+          <button class="mess mx-auto mt-2" @click="startDialog = true">
+            Send Message
+          </button>
+          <button class="mess mx-auto mt-2" @click="Subscribe">
+            Subscribe
+          </button>
+        </div>
       </div>
       <div class="col-6 p-right">
         <p v-if="profile.name" class="mt-2">{{ profile.name }}</p>
@@ -22,7 +25,8 @@
     </div>
 
     <div class="dialog mt-5 mx-auto" v-if="startDialog">
-      <p class="form-error mx-auto">{{ errors[0] }}</p> <br>
+      <p class="form-error mx-auto">{{ errors[0] }}</p>
+      <br />
       <input v-model="message" class="mx-auto" type="text" /><br />
       <button class="mess" @click="SendMessage">Send Message</button>
     </div>
@@ -45,17 +49,19 @@ export default {
     message: "",
   }),
   computed: {
-    ...mapGetters('auth', ['isLogin']),
-    ...mapGetters('profile',['ownProfile']),
+    ...mapGetters("auth", ["isLogin"]),
+    ...mapGetters("profile", ["ownProfile"]),
     localeDate() {
       return new Date(this.profile.dob).toLocaleDateString();
     },
-    isOwn(){
-      return this.ownProfile.id === this.profile.id
-    }
+    isOwn() {
+      return this.ownProfile.id === this.profile.id;
+    },
   },
   methods: {
     ...mapActions("dialog", ["fetchStartDialog"]),
+    ...mapActions("notifications", ["fetchSubscribeForUser"]),
+
     checkMessageField() {
       this.errors = [];
       if (this.message) {
@@ -71,12 +77,13 @@ export default {
           message: this.message,
           recipient: this.profile.id,
         };
-        this.startDialog = false
-        // console.log(this.isOwn, data)
-        this.fetchStartDialog(data)
-      }
+        this.startDialog = false;
 
-      // console.log(data);
+        this.fetchStartDialog(data);
+      }
+    },
+    Subscribe() {
+      this.fetchSubscribeForUser(this.profile.id);
     },
   },
 };
@@ -101,9 +108,7 @@ export default {
   border: solid 3px rgba(158, 70, 180, 0.788);
   max-width: 100%;
   background: rgba(222, 184, 135, 0.555);
-  /* bottom: 0px; */
-  /* right: 185px; */
-  /* position: absolute; */
+
   border-radius: 5px;
 }
 .mess:hover {
