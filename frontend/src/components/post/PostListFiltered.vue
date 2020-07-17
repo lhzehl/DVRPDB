@@ -1,6 +1,10 @@
 <template>
-  <div>
-    {{ posts }}
+  <div class="post-list">
+
+    <p>{{localedate}}</p>
+    <router-link :to="detail">{{ post.title }} </router-link>
+    <p>{{ shortDetail }}</p>
+    
   </div>
 </template>
 
@@ -9,37 +13,33 @@
 export default {
   name: "PostListFiltered",
   props: {
-    posts: {
-      type: Array,
+    post: {
+      type: Object,
       required: true,
     },
   },
-  // computed: {
-  //   ...mapGetters("posts", [
-  //     "paramsPosts",
-  //     "paramsCountPost",
-  //     "paramsCurrentPage",
-  //     "perPage",
-  //   ]),
-  // isExist() {
-  //   return Boolean(this.posts.length);
-  // },
-
-  // watch: {
-  //   "$route.params": {
-  //     handler: "onProfileParamsChange",
-  //     immediate: true,
-  //     depp: true,
-  //   },
-  // },
-  // methods: {
-  //   ...mapActions("posts", ["fetchPostsByParams"]),
-  //   onProfileParamsChange({ params = this.params } = {}) {
-  //     console.log(this.params);
-  //     this.fetchPostsByParams(params);
-  //   },
-  // },
+  computed: {
+    localedate() {
+      return new Date(this.post.date_create).toLocaleDateString();
+    },
+    detail() {
+      // console.log(this.post.id)
+      return `/post/${this.post.id}`;
+    },
+    shortDetail() {
+      if (this.post.descriptions.length > 250) {
+        return `${this.post.descriptions.slice(0, 250)} .....`;
+      } else {
+        return this.post.descriptions;
+      }
+    },
+  },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.post-list{
+  border: 2px solid rgba(2, 54, 37, 0.822);
+}
+
+</style>

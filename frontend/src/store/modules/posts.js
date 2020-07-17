@@ -30,7 +30,7 @@ const postsStore = {
     currentPage: ({ currentPage }) => currentPage,
     perPage: ({ perPage }) => perPage,
     paramsPosts: ({ paramsPosts }) => paramsPosts,
-    paramsCountPost: ({ usersCountPost }) => usersCountPost,
+    paramsCountPost: ({ paramsCountPost }) => paramsCountPost,
     paramsCurrentPage: ({ paramsCurrentPage }) => paramsCurrentPage,
   },
   mutations: {
@@ -47,10 +47,10 @@ const postsStore = {
       state.countPost = value;
     },
     [PARAMSPOSTS](state, value) {
-      state.userPosts = value;
+      state.paramsPosts = value;
     },
     [PARAMSPOSTSNUM](state, value) {
-      state.userCountPost = value;
+      state.paramsCountPost = value;
     },
   },
   actions: {
@@ -76,6 +76,7 @@ const postsStore = {
         );
 
         const posts = response.data.results;
+
         const countPost = response.data.count;
         commit(POSTS, posts);
         commit(POSTSNUM, countPost);
@@ -109,8 +110,9 @@ const postsStore = {
           `/api/v1/post/posts/?${tags}category=${category}&author=${author}&limit=10&offset=${page}`
         );
         const posts = response.data.results;
-        const countPost = response.data.count;
-        console.log(posts);
+        const countPost = Number(response.data.count);
+        // console.log(posts);
+        // console.log(response.data)
         commit(PARAMSPOSTS, posts);
         commit(PARAMSPOSTSNUM, countPost);
       } catch (error) {
