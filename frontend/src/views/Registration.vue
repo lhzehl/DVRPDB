@@ -54,6 +54,19 @@ export default {
     email: "",
     password: "",
   }),
+  mounted() {
+    var self = this;
+    const pass = document.querySelector("#password-input");
+    const mail = document.querySelector("#email-input");
+    function submit(event) {
+      // console.log(event)
+      if (event.keyCode === 13) {
+        self.logInFormSubmit();
+      }
+    }
+    pass.addEventListener("keydown", submit);
+    mail.addEventListener("keydown", submit);
+  },
   methods: {
     ...mapActions("auth", ["fetchNewUser"]),
     logInFormSubmit() {
@@ -102,6 +115,6 @@ export default {
 .reg {
   font-size: large;
   font-weight: bold;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 </style>

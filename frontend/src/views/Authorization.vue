@@ -9,32 +9,32 @@
         class="mb-0"
       > -->
       <p class="login">Log In</p>
-      <p class="err-auth">{{errLogin}}</p>
-        <b-form-group
-          label-cols-sm="3"
-          label="Email:"
-          label-align-sm="right"
-          label-for="email-input"
-        >
-          <b-form-input
-            v-model="email"
-            type="email"
-            id="email-input"
-          ></b-form-input>
-        </b-form-group>
+      <p class="err-auth">{{ errLogin }}</p>
+      <b-form-group
+        label-cols-sm="3"
+        label="Email:"
+        label-align-sm="right"
+        label-for="email-input"
+      >
+        <b-form-input
+          v-model="email"
+          type="email"
+          id="email-input"
+        ></b-form-input>
+      </b-form-group>
 
-        <b-form-group
-          label-cols-sm="3"
-          label="Password:"
-          label-align-sm="right"
-          label-for="password-input"
-        >
-          <b-form-input
-            v-model="password"
-            type="password"
-            id="password-input"
-          ></b-form-input>
-        </b-form-group>
+      <b-form-group
+        label-cols-sm="3"
+        label="Password:"
+        label-align-sm="right"
+        label-for="password-input"
+      >
+        <b-form-input
+          v-model="password"
+          type="password"
+          id="password-input"
+        ></b-form-input>
+      </b-form-group>
       <!-- </b-form-group> -->
       <router-link to="/registration" class="btn btn-submit mr-3"
         >Register</router-link
@@ -51,6 +51,19 @@ export default {
     email: "",
     password: "",
   }),
+  mounted() {
+    var self = this
+    const pass = document.querySelector("#password-input");
+    const mail = document.querySelector("#email-input");
+    function submit(event) {
+      // console.log(event)
+      if (event.keyCode === 13) {
+        self.logInFormSubmit();
+      }
+    }
+    pass.addEventListener("keydown", submit);
+    mail.addEventListener("keydown", submit);
+  },
   methods: {
     ...mapActions("auth", ["fetchLogin"]),
     logInFormSubmit() {
@@ -76,7 +89,7 @@ export default {
 .login {
   font-size: large;
   font-weight: bold;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 .btn-submit {
   border: solid rgba(70, 131, 180, 0.322);
@@ -86,10 +99,10 @@ export default {
   color: rgb(15, 23, 31);
   font-weight: bold;
 }
-.err-auth{
-    color: red;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    font-size: large;
+.err-auth {
+  color: red;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  font-size: large;
 }
 </style>

@@ -7,6 +7,7 @@
 
 <script>
 import NavBar from "@/components/NavBar";
+// import CategoryWidget from "@/"
 export default {
   name: "BlogApp",
   components: {

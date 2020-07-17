@@ -1,16 +1,28 @@
 <template>
   <div class="home">
-    <template v-if="isExist">
-      <div v-for="post in postList" :key="post.date_create">
-        <PostListItem :post="post" />
+    <div class="container">
+      <div class="row">
+        <div class="col-9">
+          <template v-if="isExist">
+            <div v-for="post in postList" :key="post.date_create">
+              <PostListItem :post="post" />
+            </div>
+          </template>
+        </div>
+        <div class="col-3">
+          <CategoryWidget />
+        </div>
+        
       </div>
-      <Pagination
-        :count="countPost"
-        :current-page="currentPage"
-        :per-page="perPage"
-        @pageChanged="onPageChange"
-      />
-    </template>
+      <template v-if="isExist">
+        <Pagination
+          :count="countPost"
+          :current-page="currentPage"
+          :per-page="perPage"
+          @pageChanged="onPageChange"
+        />
+      </template>
+    </div>
   </div>
 </template>
 
@@ -19,12 +31,13 @@
 import { mapActions, mapGetters } from "vuex";
 import Pagination from "@/components/Pagination";
 import PostListItem from "@/components/post/PostListItem";
-
+import CategoryWidget from "@/components/CategoryWidget";
 export default {
   name: "Home",
   components: {
     PostListItem,
     Pagination,
+    CategoryWidget,
   },
   computed: {
     ...mapGetters("posts", ["postList", "countPost", "currentPage", "perPage"]),
@@ -45,11 +58,10 @@ export default {
   },
   methods: {
     ...mapActions("posts", ["fetchPosts"]),
-    onPageChange(page){
-      console.log(this.$route)
-      this.fetchPosts(page)
+    onPageChange(page) {
+      console.log(this.$route);
+      this.fetchPosts(page);
     },
-    
   },
 };
 </script>
