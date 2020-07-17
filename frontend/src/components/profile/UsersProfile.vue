@@ -90,9 +90,11 @@ export default {
 </script>
 
 <style scoped>
+
 .profile-image {
   border-radius: 5rem;
   max-width: 200px;
+  max-height: 200px;
 }
 .p-left {
   border: solid 2px steelblue;
