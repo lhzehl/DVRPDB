@@ -10,9 +10,8 @@
           </template>
         </div>
         <div class="col-3">
-          <CategoryWidget />
+          <CategoryWidget :list="categoryList" />
         </div>
-        
       </div>
       <template v-if="isExist">
         <Pagination
@@ -41,6 +40,7 @@ export default {
   },
   computed: {
     ...mapGetters("posts", ["postList", "countPost", "currentPage", "perPage"]),
+    ...mapGetters("category", ["categoryList"]),
     isExist() {
       return Boolean(this.postList.length);
     },

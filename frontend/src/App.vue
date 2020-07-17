@@ -1,17 +1,22 @@
 <template>
   <div id="app">
     <NavBar />
-    
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar";
-// import CategoryWidget from "@/"
+import { mapActions } from "vuex";
 export default {
   name: "BlogApp",
   components: {
     NavBar,
+  },
+  mounted() {
+    this.fetchCategoryList();
+  },
+  methods: {
+    ...mapActions("category", ["fetchCategoryList"]),
   },
 };
 </script>
