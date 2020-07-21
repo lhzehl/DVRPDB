@@ -1,10 +1,12 @@
 <template>
   <div class="post-pagination d-flex justify-content-center">
-    <BPagination
-      v-model="currentPageModel"
-      :per-page="perPage"
-      :total-rows="count"
-    />
+    <template v-if="isPaginated">
+      <BPagination
+        v-model="currentPageModel"
+        :per-page="perPage"
+        :total-rows="count"
+      />
+    </template>
 
     <!-- {{ currentPage }} -->
   </div>
@@ -35,6 +37,9 @@ export default {
       set(value) {
         this.$emit("pageChanged", value);
       },
+    },
+    isPaginated() {
+      return this.count > this.perPage;
     },
   },
 };

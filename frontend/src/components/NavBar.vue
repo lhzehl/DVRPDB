@@ -2,7 +2,10 @@
   <div id="nav">
     <b-navbar toggleable="lg" type="dark" variant="info">
       <b-navbar-brand to="/">Home</b-navbar-brand>
-      <b-navbar-brand  to="/create" v-if="isLogin">Create Post</b-navbar-brand>
+
+      <b-navbar-brand  to="/create/post" v-if="isLogin">CreatePost</b-navbar-brand>
+      <!-- <b-navbar-brand  to="/create/category" v-if="isLogin">CreateCategory</b-navbar-brand> -->
+      
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
@@ -19,6 +22,7 @@
               <em>{{ ownProfile.username }}</em>
             </template>
             <b-dropdown-item to="/profile">Profile</b-dropdown-item>
+            <b-dropdown-item to="/create/post">Create Post</b-dropdown-item>
             <b-dropdown-item to="/dialog">Messages</b-dropdown-item>
             <!-- notifications -->
             <b-dropdown-item to="/notifications">Notifications</b-dropdown-item>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <button class="btn btn-success" v-if="!edited" @click="edited = !edited">
+    <button class="mt-2 profile-btn" v-if="!edited" @click="edited = !edited">
       Edit
     </button>
     <template v-if="!edited">
@@ -15,7 +15,7 @@
           <p class="mt-2">{{ profile.name || "null" }}</p>
           <p class="mt-2">{{ profile.username || "" }}</p>
           <p class="mt-2">{{ localeDate }}</p>
-          <img :src="profile.image" />
+          <img class="image" :src="profile.image" />
         </div>
       </div>
     </template>
@@ -28,31 +28,43 @@
           <p class="mt-2">Photo:</p>
         </div>
         <div class="col-6">
-          <input class="mt-2" type="text" v-model="form.name" /> <br>
-          <input class="mt-2" type="text" v-model="form.username" /> <br>
-          <b-form-datepicker class="mt-2"
+          <input class="mt-2" type="text" v-model="form.name" /> <br />
+          <input class="mt-2" type="text" v-model="form.username" /> <br />
+          <b-form-datepicker
+            class="mt-2"
             id="example-datepicker"
             v-model="form.dob"
-          ></b-form-datepicker> <br>
-          <img class="profile-image mt-2" :src="imagePreview" /> <br>
+          ></b-form-datepicker>
+          <br />
+          <img class="profile-image mt-2" :src="imagePreview" /> <br />
           <input
-          class="mt-2"
+            class="mt-2"
             type="file"
             ref="file"
             id="photo"
             accept="image/*"
             v-on:change="handleFileUpload()"
-          /> <br>
+          />
+          <br />
         </div>
       </div>
       <button class="btn btn-primary" @click="onSubmit">Save</button>
       <button class="btn" @click="edited = !edited">Cancel</button>
     </template>
+    <template v-if="!edited">
+      <template v-if="isAdmin">
+        <button v-if="!addNewCategory" class="profile-btn" @click="addNewCategory=!addNewCategory">
+          Add new Category
+        </button>
+        <CategoryCreate v-if="addNewCategory" @cancel="Cancel" />
+      </template>
+    </template>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import CategoryCreate from "@/components/category/CategoryCreate";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "AuthProfile",
   props: {
@@ -61,9 +73,13 @@ export default {
       requered: true,
     },
   },
+  components: {
+    CategoryCreate,
+  },
   data() {
     return {
       edited: false,
+      addNewCategory:false,
       form: {
         name: this.profile.name,
         username: this.profile.username,
@@ -71,16 +87,22 @@ export default {
         image: null,
         id: this.profile.id,
       },
+
       imagePreview: "",
     };
   },
   computed: {
+    ...mapGetters("profile", ["ownProfile"]),
     localeDate() {
       return new Date(this.profile.dob).toLocaleDateString();
     },
   },
   methods: {
     ...mapActions("profile", ["fetchUpdateProfile"]),
+    isAdmin() {
+      let is_admin = this.ownProfile.user.is_superuser;
+      return is_admin;
+    },
     handleFileUpload() {
       this.form.image = this.$refs.file.files[0];
       const reader = new FileReader();
@@ -115,6 +137,9 @@ export default {
 
       this.edited = false;
     },
+    Cancel(){
+      this.addNewCategory = !this.addNewCategory
+    }
   },
 };
 </script>
@@ -124,5 +149,18 @@ export default {
   width: 200px;
   height: 200px;
   border: 2px solid black;
+}
+.profile-btn {
+  border-radius: 8px;
+}
+.add-block {
+  border: 2px solid black;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50px;
+  border: 4px solid rgba(54, 32, 2, 0.596);
 }
 </style>

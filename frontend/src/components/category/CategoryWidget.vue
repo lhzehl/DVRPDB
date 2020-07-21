@@ -1,13 +1,16 @@
 <template>
   <div class="category-block">
     <p class="category-head">Categories:</p>
-    <div v-for="item in list" :key="item.id">
-      <p class="category-item">{{ item.title }}</p>
+    <div v-if="list.length">
+      <div v-for="item in list" :key="item.id">
+        <CategoryItem :item="item" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import CategoryItem from "@/components/category/CategoryItem";
 export default {
   name: "CategoryWidget",
   props: {
@@ -15,6 +18,9 @@ export default {
       type: Array,
       //   default: [],
     },
+  },
+  components: {
+    CategoryItem,
   },
 };
 </script>
