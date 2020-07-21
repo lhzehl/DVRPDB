@@ -7,6 +7,7 @@
       <div class="col-6">
         <p class="mt-2">Title:</p>
         <p class="mt-2">descriptions:</p>
+        <p class="mt-2">category:</p>
         <p class="mt-2">image:</p>
       </div>
       <div class="col-6">
@@ -25,6 +26,10 @@
           id="post-descriptions"
           class="mt-2"
         /><br />
+        <select class="mt-2" v-model="form.category">
+            <option>Chose category</option>
+            <option   :value="category.id"  v-for="category in categoryList" :key="category.title" >{{category.title}}</option>
+        </select>
         <img class="post-image mt-2" :src="imagePreview" />
         <input
           type="file"
@@ -44,19 +49,22 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "PostCreate",
   data: () => ({
     form: {
-      
       title: "",
       descriptions: "",
       image: null,
+      category: null,
     },
     errors: [],
     imagePreview: "",
   }),
+  computed: {
+    ...mapGetters("category", ["categoryList"]),
+  },
   methods: {
     ...mapActions("posts", ["fetchNewPost"]),
     handleFileUpload() {
@@ -103,7 +111,8 @@ export default {
           return Boolean(val);
         };
         const formFiltered = Object.filter(this.form, filterFunc);
-
+        // console.log(this.form.category)
+        // console.log(formFiltered)
         this.fetchNewPost(formFiltered);
       }
     },

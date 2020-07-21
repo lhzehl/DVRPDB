@@ -53,7 +53,11 @@
     </template>
     <template v-if="!edited">
       <template v-if="isAdmin">
-        <button v-if="!addNewCategory" class="profile-btn" @click="addNewCategory=!addNewCategory">
+        <button
+          v-if="!addNewCategory"
+          class="profile-btn"
+          @click="addNewCategory = !addNewCategory"
+        >
           Add new Category
         </button>
         <CategoryCreate v-if="addNewCategory" @cancel="Cancel" />
@@ -79,7 +83,7 @@ export default {
   data() {
     return {
       edited: false,
-      addNewCategory:false,
+      addNewCategory: false,
       form: {
         name: this.profile.name,
         username: this.profile.username,
@@ -96,13 +100,15 @@ export default {
     localeDate() {
       return new Date(this.profile.dob).toLocaleDateString();
     },
+    isAdmin() {
+      let admin = this.ownProfile.user.is_superuser;
+      let is_admin = !!admin; //? if admin string
+      return is_admin;
+    },
   },
   methods: {
     ...mapActions("profile", ["fetchUpdateProfile"]),
-    isAdmin() {
-      let is_admin = this.ownProfile.user.is_superuser;
-      return is_admin;
-    },
+
     handleFileUpload() {
       this.form.image = this.$refs.file.files[0];
       const reader = new FileReader();
@@ -137,9 +143,10 @@ export default {
 
       this.edited = false;
     },
-    Cancel(){
-      this.addNewCategory = !this.addNewCategory
-    }
+    Cancel() {
+      // console.log(this.isAdmin())
+      this.addNewCategory = !this.addNewCategory;
+    },
   },
 };
 </script>
