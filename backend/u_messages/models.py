@@ -5,8 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Dialog(models.Model):
-    sender = models.ForeignKey(User, verbose_name='Author', related_name='Sender', on_delete=models.CASCADE)
-    recipient = models.ForeignKey(User, verbose_name='Listener', related_name='Recipient', on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, verbose_name='Author', related_name='sender', on_delete=models.CASCADE)
+    recipient = models.ForeignKey(User, verbose_name='Listener', related_name='recipient', on_delete=models.CASCADE)
     message = models.TextField('Message')
     date_send = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField('Read', default=False)
