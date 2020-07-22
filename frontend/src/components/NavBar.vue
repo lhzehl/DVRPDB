@@ -68,4 +68,8 @@ export default {
 .mine {
   color: darkgray;
 }
+.bg-info{
+  background-color: black !important;
+}
+
 </style>

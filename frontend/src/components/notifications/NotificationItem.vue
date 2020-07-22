@@ -47,16 +47,16 @@ export default {
 
 <style scoped>
 .notify-item {
-  border: cadetblue 2px solid;
+  border: rgb(3, 3, 3) 2px solid;
 }
 .user-link {
-  color: darkblue;
+  color: rgb(0, 0, 0);
   font-size: large;
   font-weight: bolder;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .post-link {
-  color: rgba(0, 32, 139, 0.774);
+  color: rgba(0, 0, 0, 0.774);
   font-size: medium;
   font-weight: bolder;
   font-family: Verdana, Geneva, Tahoma, sans-serif;

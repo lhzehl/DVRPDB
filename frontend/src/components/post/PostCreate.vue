@@ -40,9 +40,9 @@
           v-on:change="handleFileUpload()"
         />
       </div>
-      <div class="mx-auto">
-        <button class="btn btn-primary" @click="onSubmit">Post</button>
-        <router-link class="btn" to="/">Cancel</router-link>
+      <div class="mx-auto mt-2">
+        <a class="btn-post " @click="onSubmit">Post</a>
+        <router-link class="btn-post" to="/">Cancel</router-link>
       </div>
     </div>
   </div>
@@ -124,6 +124,26 @@ export default {
 .form-error {
   font-size: x-large;
   font-weight: bold;
-  color: tomato;
+  color: rgb(0, 0, 0);
+}
+.btn-post{
+  border-radius: 15px;
+  font-size: x-large;
+  border: 4px solid black;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  /* height: 12px */
+}
+.btn-post:hover{
+  color: black;
+  font-size: xx-large;
+  font-weight: bold;
+}
+.post-image{
+  max-width: 300px;
+  max-height: 300px;
+  border: 3px black solid;
+  filter: grayscale(100%);
+
 }
 </style>

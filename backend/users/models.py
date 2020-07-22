@@ -25,8 +25,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         self.email = self.email.lower()
         super(CustomUser, self).save(*args, **kwargs)
 
-    def __str__(self):
-        return f'{self.profile.username or self.email}'
+    # def __str__(self):
+    #     return f'{self.profile.username or self.email}'
 
     class Meta:
         verbose_name = 'User'
@@ -62,11 +62,11 @@ class Profile(models.Model):
         if not self.image:
             pass
         else:
-            img = Image.open(self.image.path)
+            img = Image.open(self.image.path).convert('L')
             if img.height > 300 or img.width > 300:
                 output_size = (300, 300)
                 img.thumbnail(output_size)
-                img.save(self.image.path)
+            img.save(self.image.path)
 
     class Meta:
         verbose_name = 'User profile'

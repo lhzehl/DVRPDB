@@ -48,8 +48,8 @@
           <br />
         </div>
       </div>
-      <button class="btn btn-primary" @click="onSubmit">Save</button>
-      <button class="btn" @click="edited = !edited">Cancel</button>
+      <button class="profile-btn mt-2" @click="onSubmit">Save</button>
+      <button class="profile-btn mt-2" @click="edited = !edited">Cancel</button>
     </template>
     <template v-if="!edited">
       <template v-if="isAdmin">
@@ -156,6 +156,7 @@ export default {
   width: 200px;
   height: 200px;
   border: 2px solid black;
+  filter: grayscale(100%);
 }
 .profile-btn {
   border-radius: 8px;
@@ -168,6 +169,6 @@ export default {
   width: 150px;
   height: 150px;
   border-radius: 50px;
-  border: 4px solid rgba(54, 32, 2, 0.596);
+  border: 4px solid rgb(14, 14, 14);
 }
 </style>

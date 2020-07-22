@@ -22,3 +22,16 @@ export default {
   },
 };
 </script>
+<style scoped>
+.category-item {
+  color: black;
+  font-family: "Times New Roman", Times, serif;
+
+  font-style: italic;
+  box-shadow: rgba(37, 37, 37, 0.267);
+  font-weight: bold;
+}
+.category-item:hover{
+  font-size: x-large;
+}
+</style>

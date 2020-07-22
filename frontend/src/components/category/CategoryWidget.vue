@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .category-block {
   position: absolute;
-  border: cadetblue 2px solid;
+  border: rgb(0, 0, 0) 2px solid;
   left: 0;
   margin-top: 30px;
 }
@@ -37,7 +37,7 @@ export default {
   /* font-size: x-large; */
   font-weight: bold;
 }
-.category-item {
-  border: cadetblue 2px solid;
-}
+/* .category-item {
+  border: rgb(10, 10, 10) 2px solid;
+} */
 </style>

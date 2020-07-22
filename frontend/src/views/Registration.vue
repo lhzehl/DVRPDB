@@ -93,21 +93,21 @@ export default {
   /* margin-right: 10rem; */
 }
 .btn-submit {
-  border: solid rgba(70, 131, 180, 0.322);
+  border: solid rgba(46, 46, 46, 0.322);
 }
 .btn-submit:hover {
-  border: solid 4px slateblue !important;
+  border: solid 4px rgb(0, 0, 0) !important;
   color: rgb(15, 23, 31);
   font-weight: bold;
 }
 .err-reg {
-  color: red;
+  color: rgb(3, 3, 3);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
   font-size: large;
 }
 .is-created {
-  color: royalblue;
+  color: rgb(0, 0, 0);
   font-family: "Times New Roman", Times, serif;
   font-weight: bold;
   font-size: x-large;

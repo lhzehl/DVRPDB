@@ -12,11 +12,15 @@
       <template v-if="!edited">
         <div class="row">
           <div class="col-12 top-part">
-            <router-link class="mr-5 post-author" :to="routeToAuthor">{{
-              post.author.username
+            <router-link
+              class="mr-5 post-author route-text"
+              :to="routeToAuthor"
+              >{{ post.author.username }}</router-link
+            >
+            <a class="mr-5 route-text" href="#">{{ localedate }}</a>
+            <router-link class="route-text" v-if="isPostCategoryExist" :to="params">{{
+              post.category.title
             }}</router-link>
-            <a class="mr-5" href="#">{{ localedate }}</a>
-            <a v-if="isPostCategoryExist" href="#">{{ post.category.title }}</a>
             <img v-if="isPostImageExist" class="post-image" :src="post.image" />
           </div>
         </div>
@@ -84,6 +88,9 @@ export default {
         return false;
       }
     },
+    params() {
+      return `/posts/${this.post.category.title}`;
+    },
   },
   methods: {
     // ...mapActions('post', ['fetchUpdatePost'])
@@ -97,17 +104,17 @@ export default {
   width: 100%;
 }
 .top-part {
-  border: cadetblue 2px solid;
+  border: rgb(45, 48, 48) 2px solid;
 }
 .body-part {
-  border: cadetblue 2px solid;
+  border: rgb(0, 0, 0) 2px solid;
 }
 .upd-btn {
   color: rgba(34, 21, 2, 0.877);
   font-size: large;
   font-weight: bold;
   font-family: "Times New Roman", Times, serif;
-  border: solid 3px rgba(70, 99, 180, 0.788);
+  border: solid 3px rgba(23, 23, 24, 0.788);
   max-width: 100%;
   background: rgba(255, 255, 255, 0.555);
   /* bottom: 0px; */
@@ -116,8 +123,15 @@ export default {
   border-radius: 5px;
 }
 .upd-btn:hover {
-  background: rgba(7, 10, 196, 0.829);
-  color: rgb(255, 255, 255);
-  border: solid 1px rgb(0, 0, 0);
+  background: rgba(255, 255, 255, 0.425);
+  color: rgba(24, 24, 24, 0.897);
+  font-size: x-large;
+  border: solid 2px rgb(0, 0, 0);
+}
+.route-text {
+  color: black;
+  font-size: large;
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 </style>

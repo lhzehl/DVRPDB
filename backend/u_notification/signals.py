@@ -113,7 +113,7 @@ def update_new_notification_listeners(sender, instance, **kwargs):
     """
     Send signal when bd has new records with User notifivation
     """
-    group_name = 'notifications'
+    group_name = 'test'
     message = {
         'action': str(instance.actions.action),
         # 'by_user': str(instance.actions.by_user)

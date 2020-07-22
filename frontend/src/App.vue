@@ -12,9 +12,21 @@ export default {
   components: {
     NavBar,
   },
+  data: () => ({
+    notificationSocket: null,
+  }),
   mounted() {
     this.fetchCategoryList();
   },
+  // created: function() {
+  //   console.log("Start connection");
+
+  //   this.notificationSocket = new WebSocket(
+  //     "ws://" "127.0.0.1:8000/" + "notification/"
+  //   );
+
+  //   // this.requestSocket
+  // },
   methods: {
     ...mapActions("category", ["fetchCategoryList"]),
   },

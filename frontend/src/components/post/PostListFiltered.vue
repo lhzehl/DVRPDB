@@ -2,7 +2,7 @@
   <div class="post-list">
 
     <p>{{localedate}}</p>
-    <router-link :to="detail">{{ post.title }} </router-link>
+    <router-link class="route-text" :to="detail">{{ post.title }} </router-link>
     <p>{{ shortDetail }}</p>
     
   </div>
@@ -39,7 +39,12 @@ export default {
 
 <style scoped>
 .post-list{
-  border: 2px solid rgba(2, 54, 37, 0.822);
+  border: 2px solid rgba(41, 44, 43, 0.822);
 }
-
+.route-text {
+  color: black;
+  font-size: large;
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
 </style>
