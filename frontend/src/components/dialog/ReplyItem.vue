@@ -2,7 +2,7 @@
   <div>
     <div class="row  mt-4">
       <div class="col-4 item">
-        <router-link class="mx-auto mb-2" :to="routeToSender">{{
+        <router-link class="mx-auto mb-2 route-text" :to="routeToSender">{{
           dialog.sender.username
         }}</router-link>
         <br />
@@ -40,13 +40,19 @@ export default {
 
 <style scoped>
 .item {
-  border: rgba(0, 81, 255, 0.671) 2px solid;
+  border: rgba(0, 0, 0, 0.671) 2px solid;
   border-radius: 10px;
 }
 .profile-pic {
   width: 150px;
   height: 150px;
   border-radius: 35px;
-  border: rgba(0, 81, 255, 0.671) 2px solid;
+  border: rgba(0, 0, 0, 0.671) 2px solid;
+}
+.route-text {
+  color: black;
+  font-size: large;
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 </style>

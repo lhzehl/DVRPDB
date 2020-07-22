@@ -7,6 +7,7 @@
       <div class="col-6">
         <p class="mt-2">Title:</p>
         <p class="mt-2">descriptions:</p>
+        <p class="mt-2">category:</p>
         <p class="mt-2">image:</p>
       </div>
       <div class="col-6">
@@ -25,6 +26,10 @@
           id="post-descriptions"
           class="mt-2"
         /><br />
+        <select class="mt-2" v-model="form.category">
+            <option>Chose category</option>
+            <option   :value="category.id"  v-for="category in categoryList" :key="category.title" >{{category.title}}</option>
+        </select>
         <img class="post-image mt-2" :src="imagePreview" />
         <input
           type="file"
@@ -35,28 +40,31 @@
           v-on:change="handleFileUpload()"
         />
       </div>
-      <div class="mx-auto">
-        <button class="btn btn-primary" @click="onSubmit">Post</button>
-        <router-link class="btn" to="/">Cancel</router-link>
+      <div class="mx-auto mt-2">
+        <a class="btn-post " @click="onSubmit">Post</a>
+        <router-link class="btn-post" to="/">Cancel</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "PostCreate",
   data: () => ({
     form: {
-      
       title: "",
       descriptions: "",
       image: null,
+      category: null,
     },
     errors: [],
     imagePreview: "",
   }),
+  computed: {
+    ...mapGetters("category", ["categoryList"]),
+  },
   methods: {
     ...mapActions("posts", ["fetchNewPost"]),
     handleFileUpload() {
@@ -103,7 +111,8 @@ export default {
           return Boolean(val);
         };
         const formFiltered = Object.filter(this.form, filterFunc);
-
+        // console.log(this.form.category)
+        // console.log(formFiltered)
         this.fetchNewPost(formFiltered);
       }
     },
@@ -115,6 +124,26 @@ export default {
 .form-error {
   font-size: x-large;
   font-weight: bold;
-  color: tomato;
+  color: rgb(0, 0, 0);
+}
+.btn-post{
+  border-radius: 15px;
+  font-size: x-large;
+  border: 4px solid black;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  /* height: 12px */
+}
+.btn-post:hover{
+  color: black;
+  font-size: xx-large;
+  font-weight: bold;
+}
+.post-image{
+  max-width: 300px;
+  max-height: 300px;
+  border: 3px black solid;
+  filter: grayscale(100%);
+
 }
 </style>

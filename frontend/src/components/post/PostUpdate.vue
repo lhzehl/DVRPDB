@@ -32,9 +32,9 @@
           v-on:change="handleFileUpload()"
         />
       </div>
-      <div class="mx-auto">
-        <button class="btn btn-warning" @click="onSubmit">Update</button>
-        <button @click="cancel" class="btn btn-primary">
+      <div class="mx-auto mt-2">
+        <button class="" @click="onSubmit">Update</button>
+        <button @click="cancel" class="">
           Cancel
         </button>
       </div>

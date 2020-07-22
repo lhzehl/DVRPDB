@@ -10,6 +10,7 @@ import CreatePost from "../views/CreatePost";
 import DialogList from "../views/DialogList";
 import DialogDetail from "../views/DialogDetail";
 import Notifications from "../views/Notifications";
+import FilteredPostListByCategory from "../views/FilteredPostListByCategory";
 
 Vue.use(VueRouter);
 
@@ -47,7 +48,7 @@ const routes = [
     props: castRouteParams,
   },
   {
-    path: "/create",
+    path: "/create/post",
     name: "CreatePost",
     component: CreatePost,
   },
@@ -68,6 +69,12 @@ const routes = [
     component: Notifications,
   },
   {
+    path: "/posts/:category",
+    name: "FilteredPostListByCategory",
+    component: FilteredPostListByCategory,
+    props: castRouteParamsCategory,
+  },
+  {
     path: "/about",
     name: "About",
     // route level code-splitting
@@ -82,6 +89,11 @@ function castRouteParams(route) {
   return {
     id: Number(route.params.id),
   };
+}
+function castRouteParamsCategory(route){
+  return{
+    category: route.params.category
+  }
 }
 
 const router = new VueRouter({

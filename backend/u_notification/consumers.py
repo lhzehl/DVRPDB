@@ -1,15 +1,18 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.auth import login
+
 import json
 
 
 class NotificationUserConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
-        # await login(self.scope, user)
-        # user = self.scope["user"]
+        self.user = self.scope['user']
+        # self.group_name = self.user.profile.username
+        self.group_name='notifications'
 
-        self.group_name = 'notifications'
+
+        print(self.user, self.group_name)
 
         await self.channel_layer.group_add(
             self.group_name,
@@ -23,7 +26,6 @@ class NotificationUserConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
-
     async def send_message(self, event):
         message = event['text']
 
@@ -31,3 +33,10 @@ class NotificationUserConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps(
             message
         ))
+
+    async def receive(self, text_data):
+        ...
+        # login the user to this session.
+        await login(self.scope, user)
+        # save the session (if the session backend does not access the db you can use `sync_to_async`)
+        await database_sync_to_async(self.scope["session"].save)()

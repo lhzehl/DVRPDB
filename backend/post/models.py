@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import Profile as User
+from PIL import Image
 
 
 # from django.contrib.auth.models import  User
@@ -38,6 +39,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if not self.image:
+            pass
+        else:
+            img = Image.open(self.image.path).convert('L')
+            img.save(self.image.path)
 
 
 class Comments(models.Model):

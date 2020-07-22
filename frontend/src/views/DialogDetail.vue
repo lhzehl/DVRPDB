@@ -47,8 +47,8 @@ export default {
 <style scoped>
 .btn-d {
   color: rgba(250, 250, 250, 0.979);
-  background-color: rgba(24, 112, 2, 0.89);
+  background-color: rgba(54, 54, 54, 0.678);
   width: 100%;
-  border: 2px solid rgba(43, 2, 97, 0.808);
+  border: 3px solid rgb(0, 0, 0);
 }
 </style>

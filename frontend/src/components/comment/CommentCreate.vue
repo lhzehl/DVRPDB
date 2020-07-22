@@ -49,18 +49,18 @@ export default {
 <style scoped>
 .btn-comment {
   margin-left: 2px;
-  border: rgba(7, 70, 63, 0.719) solid 3px;
+  border: rgba(8, 8, 8, 0.719) solid 3px;
 }
 .btn-comment:hover {
-  border: rgba(18, 12, 109, 0.719) solid 3px;
+  border: rgba(2, 2, 2, 0.719) solid 3px;
   /* font-size: x-large; */
-  background: rgba(0, 0, 255, 0.459);
+  background: rgba(87, 87, 90, 0.459);
   font-weight: bold;
-  color: rgba(252, 252, 252, 0.829);
+  color: rgba(0, 0, 0, 0.829);
 }
 .form-error {
   font-size: x-large;
   font-weight: bold;
-  color: tomato;
+  color: rgb(0, 0, 0);
 }
 </style>

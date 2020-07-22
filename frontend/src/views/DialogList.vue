@@ -82,14 +82,16 @@ export default {
 <style scoped>
 .change-list {
   width: 100%;
-  border: 2px solid rgba(43, 2, 97, 0.808);
-  background-color: rgba(19, 116, 83, 0.671);
-  color: rgba(196, 199, 201, 0.753);
+  border: 3px solid rgb(0, 0, 0);
+  background-color: rgba(54, 54, 54, 0.945);
+  color: rgba(194, 194, 194, 0.911);
 }
 .change-list-active {
-  color: rgba(250, 250, 250, 0.979);
-  background-color: rgba(24, 112, 2, 0.89);
+  color: rgba(0, 0, 0, 0.979);
+  background-color: rgba(255, 255, 255, 0.89);
+  font-size: x-large;
   width: 100%;
-  border: 2px solid rgba(43, 2, 97, 0.808);
+  border: 5px solid rgb(0, 0, 0);
+  font-weight: bold;
 }
 </style>

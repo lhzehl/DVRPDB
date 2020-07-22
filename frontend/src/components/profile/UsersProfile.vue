@@ -90,37 +90,35 @@ export default {
 </script>
 
 <style scoped>
-
 .profile-image {
   border-radius: 5rem;
   max-width: 200px;
-  max-height: 200px;
 }
 .p-left {
-  border: solid 2px steelblue;
+  border: solid 2px rgb(2, 2, 2);
 }
 .p-right {
-  border: solid 2px steelblue;
+  border: solid 2px rgb(0, 0, 0);
 }
 .mess {
   color: rgba(34, 21, 2, 0.877);
   font-size: large;
   font-weight: bold;
   font-family: "Times New Roman", Times, serif;
-  border: solid 3px rgba(158, 70, 180, 0.788);
+  border: solid 3px rgba(37, 37, 37, 0.788);
   max-width: 100%;
-  background: rgba(222, 184, 135, 0.555);
+  background: rgba(212, 212, 212, 0.555);
 
   border-radius: 5px;
 }
 .mess:hover {
-  background: rgba(196, 83, 7, 0.829);
-  color: aliceblue;
-  border: solid 4px rgb(104, 43, 3);
+  background: rgba(255, 255, 255, 0.829);
+  color: rgb(0, 0, 0);
+  border: solid 4px rgb(0, 0, 0);
 }
 .dialog {
   position: relative;
-  border: solid 2px steelblue;
+  border: solid 2px rgb(0, 0, 0);
   max-width: 80%;
   max-height: 500px;
   min-height: 100px;
@@ -128,6 +126,6 @@ export default {
 .form-error {
   font-size: x-large;
   font-weight: bold;
-  color: tomato;
+  color: rgb(0, 0, 0);
 }
 </style>

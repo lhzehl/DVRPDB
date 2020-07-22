@@ -1,10 +1,10 @@
 <template>
-  <div class="home">
+  <div>
     <div class="container">
       <div class="row">
         <div class="col-9">
           <template v-if="isExist">
-            <div v-for="post in postList" :key="post.date_create">
+            <div v-for="post in paramsPosts" :key="post.date_create">
               <PostListItem :post="post" />
             </div>
           </template>
@@ -15,8 +15,8 @@
       </div>
       <template v-if="isExist">
         <Pagination
-          :count="countPost"
-          :current-page="currentPage"
+          :count="paramsCountPost"
+          :current-page="paramsCurrentPage"
           :per-page="perPage"
           @pageChanged="onPageChange"
         />
@@ -26,42 +26,62 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import { mapActions, mapGetters } from "vuex";
 import Pagination from "@/components/Pagination";
 import PostListItem from "@/components/post/PostListItem";
 import CategoryWidget from "@/components/category/CategoryWidget";
+
 export default {
-  name: "Home",
+  name: "FilteredPostListByCategory",
+
+  props: {
+    category: {
+      type: String,
+    },
+  },
+  data: () => ({
+    params: {},
+  }),
+
   components: {
     PostListItem,
     Pagination,
     CategoryWidget,
   },
+
   computed: {
-    ...mapGetters("posts", ["postList", "countPost", "currentPage", "perPage"]),
+    ...mapGetters("posts", [
+      "paramsPosts",
+      "perPage",
+      "paramsCountPost",
+      "paramsCurrentPage",
+    ]),
     ...mapGetters("category", ["categoryList"]),
     isExist() {
-      return Boolean(this.postList.length);
+      return Boolean(this.paramsPosts.length);
     },
   },
-  // watch: {
-  //   "$route.params": {
-  //     handler: "onPageChange",
-  //     immediate: true,
-  //     depp: true,
-  //   },
-  // },
-  mounted() {
-    this.fetchPosts(1);
-    // page = 1 =>0
+  watch: {
+    "$route.params": {
+      handler: "onCategoryChange",
+      immediate: true,
+      depp: true,
+    },
   },
   methods: {
-    ...mapActions("posts", ["fetchPosts"]),
+    ...mapActions("posts", ["fetchPostsByParams"]),
     onPageChange(page) {
-      // console.log(this.$route);
-      this.fetchPosts(page);
+      const params = this.params;
+      params.page = page;
+      this.fetchPostsByParams(params);
+    },
+    onCategoryChange({ category = this.category }) {
+      const params = this.params;
+      params.category = category;
+      this.fetchPostsByParams(params);
     },
   },
 };
 </script>
+
+<style scoped></style>

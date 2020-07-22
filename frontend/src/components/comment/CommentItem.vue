@@ -3,7 +3,7 @@
     <div class="row mt-2 mb-2">
       <div class="col-4 comment-author">
 
-                  <router-link class="mr-5 " :to="routeToAuthor">{{
+                  <router-link class="mr-5 route-text" :to="routeToAuthor">{{
             comment.author.username
           }}</router-link>
         <img
@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 .comment-author {
-  border: solid 2px steelblue;
+  border: solid 2px rgb(0, 0, 0);
 }
 .comment-author-image {
   max-width: 100%;
@@ -44,6 +44,12 @@ export default {
   position: relative;
 }
 .comment-body {
-  border: solid 2px steelblue;
+  border: solid 2px rgb(0, 0, 0);
+}
+.route-text {
+  color: black;
+  font-size: large;
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 </style>

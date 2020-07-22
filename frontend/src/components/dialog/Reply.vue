@@ -50,18 +50,18 @@ export default {
 <style scoped>
 .btn-reply {
   margin-left: 2px;
-  border: rgba(7, 70, 63, 0.719) solid 3px;
+  border: rgba(32, 32, 32, 0.719) solid 3px;
 }
 .btn-reply:hover {
-  border: rgba(18, 12, 109, 0.719) solid 3px;
+  border: rgba(0, 0, 0, 0.719) solid 3px;
   /* font-size: x-large; */
-  background: rgba(0, 0, 255, 0.459);
+  background: rgba(102, 102, 102, 0.459);
   font-weight: bold;
   color: rgba(252, 252, 252, 0.829);
 }
 .form-error {
   font-size: x-large;
   font-weight: bold;
-  color: tomato;
+  color: rgb(2, 2, 2);
 }
 </style>
